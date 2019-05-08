@@ -39,7 +39,8 @@
 				<a href="#" class="list-group-item list-group-item-action bg-light">Request
 					a Credit</a> <a href="#"
 					class="list-group-item list-group-item-action bg-light">Status
-					of Credits</a> <a href="#"
+					of Credits</a><a href="#"
+					class="list-group-item list-group-item-action bg-light">My Requests</a> <a href="#"
 					class="list-group-item list-group-item-action bg-light">Deposite
 					Money</a> <a href="#"
 					class="list-group-item list-group-item-action bg-light">Pay
@@ -106,9 +107,10 @@
 							<td th:text="${CurrentCredits.credit_id}"></td>
 							<td th:text="'$'+${CurrentCredits.current_amount}"></td>
 							<td th:text="${CurrentCredits.number_of_payments_left}"></td>
-							<td th:text="${(CurrentCredits.current_amount * ((CurrentCredits.interest_rate / 12)/100)) / 
+							<td th:text="${ #numbers.formatCurrency( (CurrentCredits.current_amount * ((CurrentCredits.interest_rate / 12)/100)) / 
 							( (((((CurrentCredits.interest_rate / 12)/100)) + 1)^CurrentCredits.number_of_payments_left) - 1 ) + 
-							( (CurrentCredits.current_amount * ((CurrentCredits.interest_rate / 12)/100)) )}"></td>
+							( (CurrentCredits.current_amount * ((CurrentCredits.interest_rate / 12)/100)) ) )
+							}"></td>
 							<td><a class="btn btn-primary eBtn">Add</a></td>
 
 						</tr>

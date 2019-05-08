@@ -1,20 +1,9 @@
-package com.helpmeout.accountApp;
+package com.helpmeout.depositeMoney;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-
-@Entity
-public class Mainaccount {
+public class DepositeMoneyBean {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer transaction_id;
 	private Integer transaction_user_id;
 	private String transaction_type;
@@ -23,9 +12,12 @@ public class Mainaccount {
 	private Integer credit_id;
 	private Integer end_user_money;
 	private Double current_amount;
-	public Mainaccount() {
+	
+	public DepositeMoneyBean() {
 		
 	}
+	
+	
 	public Integer getTransaction_id() {
 		return transaction_id;
 	}
@@ -74,15 +66,9 @@ public class Mainaccount {
 	public void setCurrent_amount(Double current_amount) {
 		this.current_amount = current_amount;
 	}
-	@Override
-	public String toString() {
-		return "Mainaccount [transaction_id=" + transaction_id + ", transaction_user_id=" + transaction_user_id
-				+ ", transaction_type=" + transaction_type + ", amount=" + amount + ", transaction_date="
-				+ transaction_date + ", credit_id=" + credit_id + ", end_user_money=" + end_user_money
-				+ ", current_amount=" + current_amount + "]";
-	}
-	public Mainaccount(Integer transaction_id, Integer transaction_user_id, String transaction_type, String amount,
-			Date transaction_date, Integer credit_id, Integer end_user_money, Double current_amount) {
+	public DepositeMoneyBean(Integer transaction_id, Integer transaction_user_id, String transaction_type,
+			String amount, Date transaction_date, Integer credit_id, Integer end_user_money, Double current_amount) {
+		super();
 		this.transaction_id = transaction_id;
 		this.transaction_user_id = transaction_user_id;
 		this.transaction_type = transaction_type;
@@ -91,6 +77,13 @@ public class Mainaccount {
 		this.credit_id = credit_id;
 		this.end_user_money = end_user_money;
 		this.current_amount = current_amount;
+	}
+	@Override
+	public String toString() {
+		return "DepositeMoneyBean [transaction_id=" + transaction_id + ", transaction_user_id=" + transaction_user_id
+				+ ", transaction_type=" + transaction_type + ", amount=" + amount + ", transaction_date="
+				+ transaction_date + ", credit_id=" + credit_id + ", end_user_money=" + end_user_money
+				+ ", current_amount=" + current_amount + "]";
 	}
 
 }

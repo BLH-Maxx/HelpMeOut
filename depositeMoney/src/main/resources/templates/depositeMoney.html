@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Deposite</title>
@@ -92,17 +92,19 @@
 				<h1 class="mt-4">Something Nice will be here but currently i
 					have no idea</h1>
 
+
+
+
+
 				<div class="container">
-					<form class="form-inline">
-						<div class="form-group mb-2">
-							<h3>Chose the Amount you want to deposite.</h3>
-						</div>
-						<div class="form-group mx-sm-3 mb-2">
-							<label for="depositeAmount" class="sr-only">Amount</label> <input
-								type="password" class="form-control" id="inputPassword2"
-								placeholder="Amount">
-						</div>
-						<button type="submit" class="btn btn-primary mb-2">Deposite</button>
+					<form action="#" th:action="@{/makeadeposit}" th:object="${depositeMoneyBean}"
+						method="post">
+						<p>
+							Id: <input type="text" th:field="*{amount}" />
+						</p>
+						<p>
+							<input type="submit" value="Submit" />
+						</p>
 					</form>
 				</div>
 
