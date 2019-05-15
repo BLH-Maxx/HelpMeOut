@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Help Me Out</title>
@@ -29,8 +29,8 @@ crossorigin="anonymous">
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item list-group-item-action bg-light">Request a Credit</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Status of Credits</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Deposite Money</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Pay Credits</a>
+        <a href="http://localhost:8100/makeadeposit" class="list-group-item list-group-item-action bg-light">Deposite Money</a>
+        <a href="http://localhost:8300/mycredit" class="list-group-item list-group-item-action bg-light">My Credits</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Borrow Money</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">LogOut</a>
       </div>
@@ -50,7 +50,7 @@ crossorigin="anonymous">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Something Here <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="http://localhost:8000/">Help Me Out <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">And Here</a>
@@ -70,12 +70,16 @@ crossorigin="anonymous">
         </div>
       </nav>
 
+<!-- here we start the code of each page -->
+
       <div class="container-fluid">
         <h1 class="mt-4">Something Nice will be here but currently i have no idea</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean venenatis, sem eu imperdiet sodales, nulla ipsum imperdiet tortor, ut auctor massa mauris non dui</p>
         <p>Proin imperdiet ullamcorper pretium. Donec tempus lacus metus, eget tempor leo efficitur placerat. Integer quis pharetra dolor. Mauris enim erat, sodales a pretium eget, placerat id nibh. Cras tincidunt dictum nisl, et mollis felis commodo sed. Vivamus in mi augue.</p>
       </div>
     </div>
+    
+<!-- Here we end the code of each page -->
     <!-- /#page-content-wrapper -->
 
   </div>

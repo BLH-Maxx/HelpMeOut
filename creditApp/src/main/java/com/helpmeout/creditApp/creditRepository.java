@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface creditRepository extends JpaRepository<Credit, Integer> {
 
 	public List<Credit> findAllByUserId(Integer userId);
+	public List<Credit> findLenderOneByCreditId(Integer creditId);
 
 }

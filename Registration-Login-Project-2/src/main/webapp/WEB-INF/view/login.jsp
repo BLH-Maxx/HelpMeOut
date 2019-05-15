@@ -29,8 +29,6 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
-				<li><a href="/show-users">All Users</a></li>
-				<li><a href="/show-users">All Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/register"><span
@@ -55,6 +53,9 @@
 			</c:when>
 			<c:when test="${isExist == false}">
 				<span class="alert alert-danger" role="alert">${messages.UserNotFound}</span>
+			</c:when>
+			<c:when test="${login == true}">
+				<span class="alert alert-danger" role="alert">${login}</span>
 			</c:when>
 			<c:otherwise>
     			<span class="badge badge-pill badge-warning">Please input your credentials to login</span>

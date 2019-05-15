@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
 	pageEncoding="windows-1256"%>
 <!DOCTYPE html >
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -22,14 +22,14 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
-				<li><a href="/show-users">All Users</a></li>
-				<li><a href="/show-users">All Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/register"><span
 						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><a href="/login"><span
 						class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li><a href="/admin/admin-dashboard"><span
+						class="glyphicon glyphicon-tower"></span> Admin Dashboard</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -41,32 +41,47 @@
 					<h2>Welcome to Lernia auto borrowing system</h2>
 					<h3>Click on the option you want on the navbar</h3>
 				</div>
-			</div>
-			<div id="carouselExampleControls" class="carousel slide"
-				data-ride="carousel">
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img class="d-block w-100" src="lernia2.jpg" alt="First slide"
-							style="width: 794; height: 264px" />
+
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+					</ol>
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner">
+						<div class="item active">
+							<img
+								src="https://www.naturespicsonline.com/system/carousel_image/file/212/61.jpg"
+								alt="Los Angeles">
+						</div>
+
+						<div class="item">
+							<img
+								src="https://www.naturespicsonline.com/system/carousel_image/file/209/58.jpg"
+								alt="Chicago">
+						</div>
+
+						<div class="item">
+							<img
+								src="https://www.naturespicsonline.com/system/carousel_image/file/214/63.jpg"
+								alt="New York">
+						</div>
 					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="/src/main/webapp/WEB-INF/view/exchange-rate.jpg"
-							alt="Second slide" style="width: 794px; height: 264px" />
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" src="programmer2.jpg" alt="Third slide"
-							style="width: 794px; height: 264px" />
-					</div>
+
+					<!-- Left and right controls -->
+					<a class="left carousel-control" href="#myCarousel"
+						data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#myCarousel"
+						data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right"></span> <span
+						class="sr-only">Next</span>
+					</a>
 				</div>
-				<a class="carousel-control-prev" href="#carouselExampleControls"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="carousel-control-next" href="#carouselExampleControls"
-					role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"></span> <span
-					class="sr-only">Next</span>
-				</a>
 			</div>
 		</c:when>
 
@@ -75,7 +90,7 @@
 				<h3>Update User</h3>
 				<hr>
 				<form class="form-horizontal" method="POST" action="update-user">
-					<input type="hidden" name="id" value="${user.id}" />
+					<input type="hidden" name="user_id" value="${user.user_id}" />
 
 					<div class="form-group">
 						<label class="control-label col-md-3">Personal Number</label>

@@ -30,8 +30,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
-				<li><a href="/show-users">All Users</a></li>
-				<li><a href="/show-users">All Users</a></li>
+				<li><a href="/admin/show-all-users">All Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/register"><span
@@ -52,7 +51,7 @@
 
 		<br> <br>
 		<form class="form-horizontal" method="POST" action="save-user">
-			<input type="hidden" name="id" value="${user.id}" />
+			<input type="hidden" name="id" value="${user.user_id}" />
 
 			<div class="form-group">
 				<label class="control-label col-md-3">Personal Number</label>
@@ -144,6 +143,3 @@
 
 </body>
 </html>
-
-
-

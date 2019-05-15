@@ -22,15 +22,15 @@
 	rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-light" style="background-color: #d5d2f4;">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/welcome">Lernia</a>
+				<a class="navbar-brand" href="/admin/admin-dashboard">Admin
+					Dashboard</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
-				<li><a href="/show-users">All Users</a></li>
-				<li><a href="/show-users">All Users</a></li>
+				<li><a href="/admin/show-all-users">All Users</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/register"><span
@@ -50,13 +50,14 @@
 					<tr>
 						<th>Id</th>
 						<th>UserName</th>
+						<th>Personal Number</th>
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Address</th>
 						<th>Email</th>
 						<th>Phone</th>
 						<th>Rating</th>
-						<th>Active?</th>
+						<th>Active</th>
 						<th>Delete</th>
 						<th>Edit</th>
 					</tr>
@@ -64,8 +65,9 @@
 				<tbody>
 					<c:forEach var="user" items="${users}">
 						<tr>
-							<td>${user.id}</td>
+							<td>${user.user_id}</td>
 							<td>${user.userName}</td>
+							<td>${user.personalNumber}</td>
 							<td>${user.firstName}</td>
 							<td>${user.lastName}</td>
 							<td>${user.address}</td>
@@ -74,9 +76,9 @@
 							<td>${user.rating}</td>
 							<td>${user.active}</td>
 
-							<td><a href="/delete-user?id=${user.id}"><span
+							<td><a href="/admin/delete-user?id=${user.user_id}"><span
 									class="glyphicon glyphicon-trash"></span></a></td>
-							<td><a href="/edit-user?id=${user.id}"><span
+							<td><a href="/admin/edit-user?id=${user.user_id}"><span
 									class="glyphicon glyphicon-pencil"></span></a></td>
 						</tr>
 					</c:forEach>

@@ -1,9 +1,5 @@
 package com.lernia.spring.registration.api.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -36,9 +32,9 @@ import lombok.Setter;
 public class User {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int user_id;
 
 	@NotNull
 	@Column(name = "personal_number", unique = true)
@@ -86,12 +82,12 @@ public class User {
 
 	@Column(name = "roles")
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", personalNumber=" + personalNumber + ", userName=" + userName + ", firstName="
+		return "User [id=" + user_id + ", personalNumber=" + personalNumber + ", userName=" + userName + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", address=" + address + ", email=" + email + ", phone="
 				+ phone + ", password=" + password + ", active=" + active + ", rating=" + rating + ", roles=" + roles
 				+ "]";

@@ -1,8 +1,6 @@
 package com.lernia.spring.registration.api.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,8 +10,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +32,10 @@ public class UserService {
 	// BCryptPasswordEncoder encoder;
 	// private Random random = new Random();
 
+	public UserService() {
+		super();
+	}
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -40,11 +43,15 @@ public class UserService {
 	private RoleRepository roleRepository;
 
 	public void saveMyUser(User user) {
+		Role role = roleRepository.findByRole("USER");
+		Set<Role> roles = new HashSet<>();
+		roles.add(role);
 		user.setPassword(encoder().encode(user.getPassword()));
 		user.setActive(true);
 		user.setRating(ThreadLocalRandom.current().nextInt(0, 10 + 1));
 		user.setBalance(1000 * ThreadLocalRandom.current().nextInt(0, 50 + 1));
-		//user.setRoles(new HashSet<>(roleRepository.findByRole("USER")));
+		user.setRoles(roles);
+		user.setRoles(user.getRoles());
 		System.out.println("Baq" + roleRepository.findAll());
 		userRepository.save(user);
 
@@ -95,4 +102,20 @@ public class UserService {
 
 	}
 
+	public User getByID(long id) {
+		return userRepository.findById((int) id).orElseThrow(() -> new EntityNotFoundException("id"));
+
+	}
+
+	public int getUserIdFromPrinciple() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+		System.out.println("Baaaaaaaaaq2" + name.toString());
+		User user = userRepository.findByuserName(name);
+		if (user == null) {
+			return 0;
+		}
+		System.out.println("Baaaaaaaaaq" + user.toString());
+		return user.getUser_id();
+	}
 }

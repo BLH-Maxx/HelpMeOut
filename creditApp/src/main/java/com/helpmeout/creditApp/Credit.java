@@ -13,7 +13,8 @@ public class Credit {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer credit_id;
+	@Column(name = "credit_id")
+	private Integer creditId;
 	
 	@Column(name = "user_id")
 	private Integer userId; 
@@ -23,18 +24,30 @@ public class Credit {
 	private Integer request_id;
 	private Integer number_of_payments_left;
 	private Double interest_rate;
-	private Integer lender_one;
-	private Integer lender_two;
-	private Integer lender_three;
-	private Integer lender_four;
-	private Integer lender_five;
-	private Integer number_of_lenders;
+	@Column(name = "lender_one")
+	private Integer lenderOne;
+	
+	@Column(name = "lender_two")
+	private Integer lenderTwo;
+	
+	@Column(name = "lender_three")
+	private Integer lenderThree;
+	
+	@Column(name = "lender_four")
+	private Integer lenderFour;
+	
+	@Column(name = "lender_five")
+	private Integer lenderFive;
+	
+	@Column(name = "number_of_lenders")
+	private Integer numberOfLenders;
+	
 	private Date date_of_deposite;
 	public Integer getCredit_id() {
-		return credit_id;
+		return creditId;
 	}
 	public void setCredit_id(Integer credit_id) {
-		this.credit_id = credit_id;
+		this.creditId = credit_id;
 	}
 	public Integer getUser_id() {
 		return userId;
@@ -73,40 +86,40 @@ public class Credit {
 		this.interest_rate = interest_rate;
 	}
 	public Integer getLender_one() {
-		return lender_one;
+		return lenderOne;
 	}
 	public void setLender_one(Integer lender_one) {
-		this.lender_one = lender_one;
+		this.lenderOne = lender_one;
 	}
 	public Integer getLender_two() {
-		return lender_two;
+		return lenderTwo;
 	}
 	public void setLender_two(Integer lender_two) {
-		this.lender_two = lender_two;
+		this.lenderTwo = lender_two;
 	}
 	public Integer getLender_three() {
-		return lender_three;
+		return lenderThree;
 	}
 	public void setLender_three(Integer lender_three) {
-		this.lender_three = lender_three;
+		this.lenderThree = lender_three;
 	}
 	public Integer getLender_four() {
-		return lender_four;
+		return lenderFour;
 	}
 	public void setLender_four(Integer lender_four) {
-		this.lender_four = lender_four;
+		this.lenderFour = lender_four;
 	}
 	public Integer getLender_five() {
-		return lender_five;
+		return lenderFive;
 	}
 	public void setLender_five(Integer lender_five) {
-		this.lender_five = lender_five;
+		this.lenderFive = lender_five;
 	}
 	public Integer getNumber_of_lenders() {
-		return number_of_lenders;
+		return numberOfLenders;
 	}
 	public void setNumber_of_lenders(Integer number_of_lenders) {
-		this.number_of_lenders = number_of_lenders;
+		this.numberOfLenders = number_of_lenders;
 	}
 	public Date getDate_of_deposite() {
 		return date_of_deposite;
@@ -116,30 +129,30 @@ public class Credit {
 	}
 	@Override
 	public String toString() {
-		return "credit [credit_id=" + credit_id + ", user_id=" + userId + ", inicial_amount=" + inicial_amount
+		return "credit [credit_id=" + creditId + ", user_id=" + userId + ", inicial_amount=" + inicial_amount
 				+ ", current_amount=" + current_amount + ", request_id=" + request_id + ", number_of_payments_left="
-				+ number_of_payments_left + ", interest_rate=" + interest_rate + ", lender_one=" + lender_one
-				+ ", lender_two=" + lender_two + ", lender_three=" + lender_three + ", lender_four=" + lender_four
-				+ ", lender_five=" + lender_five + ", number_of_lenders=" + number_of_lenders + ", date_of_deposite="
+				+ number_of_payments_left + ", interest_rate=" + interest_rate + ", lender_one=" + lenderOne
+				+ ", lender_two=" + lenderTwo + ", lender_three=" + lenderThree + ", lender_four=" + lenderFour
+				+ ", lender_five=" + lenderFive + ", number_of_lenders=" + numberOfLenders + ", date_of_deposite="
 				+ date_of_deposite + "]";
 	}
 	public Credit(Integer credit_id, Integer user_id, Double inicial_amount, Double current_amount, Integer request_id,
 			Integer number_of_payments_left, Double interest_rate, Integer lender_one, Integer lender_two,
 			Integer lender_three, Integer lender_four, Integer lender_five, Integer number_of_lenders,
 			Date date_of_deposite) {
-		this.credit_id = credit_id;
+		this.creditId = credit_id;
 		this.userId = user_id;
 		this.inicial_amount = inicial_amount;
 		this.current_amount = current_amount;
 		this.request_id = request_id;
 		this.number_of_payments_left = number_of_payments_left;
 		this.interest_rate = interest_rate;
-		this.lender_one = lender_one;
-		this.lender_two = lender_two;
-		this.lender_three = lender_three;
-		this.lender_four = lender_four;
-		this.lender_five = lender_five;
-		this.number_of_lenders = number_of_lenders;
+		this.lenderOne = lender_one;
+		this.lenderTwo = lender_two;
+		this.lenderThree = lender_three;
+		this.lenderFour = lender_four;
+		this.lenderFive = lender_five;
+		this.numberOfLenders = number_of_lenders;
 		this.date_of_deposite = date_of_deposite;
 	}
 	

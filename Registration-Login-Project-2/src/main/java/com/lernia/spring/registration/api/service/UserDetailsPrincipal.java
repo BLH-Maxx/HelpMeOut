@@ -14,7 +14,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CustomUserDetails implements UserDetails {
+public class UserDetailsPrincipal implements UserDetails {
+
+	public UserDetailsPrincipal(User user) {
+		this.user = user;
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,6 +26,8 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		System.out.println(user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+				.collect(Collectors.toList()));
 		return user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
 				.collect(Collectors.toList());
 	}
@@ -53,7 +59,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return user.getActive();
 	}
 
 }

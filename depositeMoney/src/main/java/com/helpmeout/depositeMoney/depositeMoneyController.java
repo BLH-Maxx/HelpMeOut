@@ -27,6 +27,10 @@ public class depositeMoneyController {
 		return "depositeMoney";
 	}
 	
+	@GetMapping("/thanksfordeposite")
+	public String thanksForDeposite(Model model) {
+		return "thanksfordeposite";
+	}
 	
 	@PostMapping("/makeadeposit")
 	public String makeADeposite(@ModelAttribute DepositeMoneyBean depositeMoneyBean) {
@@ -40,7 +44,7 @@ public class depositeMoneyController {
 		
 		proxy.makeTransaction(depositeMoneyBean);
 		
-		return "deposteMoney";
+		return "redirect:/thanksfordeposite";
 	}
 
 

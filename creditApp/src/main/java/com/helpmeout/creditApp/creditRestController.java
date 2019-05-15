@@ -15,10 +15,11 @@ public class creditRestController {
 	
 	@GetMapping("/all")
 	public List<Credit> showAllCredits(){
+		
 		return credit.findAll();
 		
 				
 	}
 	
-
+	
 }

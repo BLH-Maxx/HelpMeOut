@@ -7,17 +7,24 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.lernia.spring.registration.api.model.User;
 import com.lernia.spring.registration.api.service.UserService;
@@ -33,7 +40,10 @@ public class ApplicationController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/welcome")
+	@Autowired
+	HttpSession session;
+
+	@RequestMapping({ "/welcome", "/" })
 	public String welcom(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
@@ -65,55 +75,7 @@ public class ApplicationController {
 		}
 		userService.saveMyUser(user);
 		request.setAttribute("mode", "MODE_HOME");
-		return "login";
-	}
-
-	@RequestMapping("/edit-user")
-	public String editUser(@RequestParam int id, HttpServletRequest request) {
-		request.setAttribute("user", userService.editUser(id));
-		request.setAttribute("mode", "MODE_UPDATE");
-		return "welcomepage";
-	}
-
-	@PostMapping("/update-user")
-	public String updateUser(@ModelAttribute User user, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("Samer " + user.toString());
-		Map<String, String> messages = new HashMap<String, String>();
-		messages.put("Updated", "This user has been uodated.");
-		request.setAttribute("messages", messages);
-		User userFromDatabase = userService.findByUserName(user.getUserName());
-
-		if (user.getPersonalNumber() == userFromDatabase.getPersonalNumber()) {
-			user.setActive(userFromDatabase.getActive());
-			user.setRating(userFromDatabase.getRating());
-			user.setRoles(userFromDatabase.getRoles());
-			userService.updateMyUser(user);
-			return "login";
-
-		} else {
-			messages.put("NotFound", "This user can't be updated.");
-			request.setAttribute("mode", "MODE_UPDATE");
-			return "welcomepage";
-
-		}
-
-	}
-
-	@GetMapping("/show-users")
-	public String showAllUsers(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setAttribute("users", userService.showAllUsers());
-		System.out.println(userService.showAllUsers());
-		// request.getRequestDispatcher("/allusers").forward(request, response);
-		return "allusers";
-	}
-
-	@GetMapping("/delete-user")
-	public String deleteUser(@RequestParam int id, HttpServletRequest request) {
-		userService.deleteTheUser(id);
-		request.setAttribute("users", userService.showAllUsers());
-		return "allusers";
+		return "redirect:/login";
 	}
 
 	@RequestMapping("/login")
@@ -124,7 +86,7 @@ public class ApplicationController {
 
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute User user, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException, InterruptedException {
 		Map<String, String> messages = new HashMap<String, String>();
 		request.setAttribute("messages", messages);
 		User userFromDatabase = userService.findByUserName(user.getUserName());
@@ -148,9 +110,8 @@ public class ApplicationController {
 			request.setAttribute("messages", messages);
 			System.out.println("samer" + request.getContextPath());
 			System.out.println(messages);
-			// request.getRequestDispatcher("/webapp/WEB-INF/view/dashboard").forward(request,
-			// response);
-			return "dashboard";
+			System.out.println("Baq baq");
+			return "redirect:/my-dashboard";
 		} else {
 			Boolean BadCredentials = true;
 			messages.put("BadCredentials", "Invalid Username or Password");
@@ -161,4 +122,37 @@ public class ApplicationController {
 			return "login";
 		}
 	}
+
+	public class obteinUserSession {
+		@RequestMapping(value = "/loginds", method = RequestMethod.GET)
+		public String UserSession(ModelMap modelMap) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			System.out.println(auth.toString());
+			String name = auth.getName();
+			modelMap.addAttribute("username", name);
+			return "hellos " + name;
+		}
+	}
+
+	@RequestMapping(value = "/samer", method = RequestMethod.GET)
+	public static HttpSession session() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		System.out.println("att  " + attr);
+		return attr.getRequest().getSession(true); // true == allow create
+	}
+
+	@GetMapping("/my-dashboard")
+	public String showDashboard(HttpServletRequest request, HttpServletResponse response) {
+		// userService.getUserIdFromPrinciple();
+		if (userService.getUserIdFromPrinciple() == 0) {
+			request.setAttribute("login", "You have to login first");
+			return "/login";
+		}
+		session.setAttribute("user_id", userService.getUserIdFromPrinciple());
+		return "dashboard";
+		
+		
+		
+	}
+
 }
