@@ -65,7 +65,7 @@ public class BorrowService {
 
 	}
 
-	public void saveMyborrowRequest(Borrow borrow) {
+	public Borrow saveMyborrowRequest(Borrow borrow) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 		LocalDateTime now = LocalDateTime.now();
 		borrow.setUserName(getUserIdFromPrinciple());
@@ -77,10 +77,14 @@ public class BorrowService {
 		System.out.println("DTF === " + dtf);
 		System.out.println("NOW === " + now);
 		borrowRepository.save(borrow);
+		return borrow;
 	}
 
 	public String getUserIdFromPrinciple() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null) {
+			return "";
+		}
 		String name = auth.getName();
 		return name;
 	}
