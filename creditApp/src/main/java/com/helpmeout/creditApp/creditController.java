@@ -35,8 +35,11 @@ public class creditController {
 		List<Credit> findAllByUserId = credit.findAllByUserId(theUserId);
 		
 		
+		
 		model.addAttribute("currentCredits", credit.findAllByUserId(theUserId));
 		model.addAttribute("try", findAllByUserId.get(0).getInterest_rate());
+		
+		System.out.println(findAllByUserId);
 		
 		return "creditIndex.html";
 	}

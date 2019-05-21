@@ -1,5 +1,6 @@
 package com.helpmeout.creditApp;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,15 +13,15 @@ import javax.persistence.Id;
 public class Credit {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "credit_id")
 	private Integer creditId;
 	
 	@Column(name = "user_id")
 	private Integer userId; 
 	
-	private Double inicial_amount;
-	private Double current_amount;
+	private BigDecimal inicial_amount;
+	private BigDecimal current_amount;
 	private Integer request_id;
 	private Integer number_of_payments_left;
 	private Double interest_rate;
@@ -55,16 +56,16 @@ public class Credit {
 	public void setUser_id(Integer user_id) {
 		this.userId = user_id;
 	}
-	public Double getInicial_amount() {
+	public BigDecimal getInicial_amount() {
 		return inicial_amount;
 	}
-	public void setInicial_amount(Double inicial_amount) {
+	public void setInicial_amount(BigDecimal inicial_amount) {
 		this.inicial_amount = inicial_amount;
 	}
-	public Double getCurrent_amount() {
+	public BigDecimal getCurrent_amount() {
 		return current_amount;
 	}
-	public void setCurrent_amount(Double current_amount) {
+	public void setCurrent_amount(BigDecimal current_amount) {
 		this.current_amount = current_amount;
 	}
 	public Integer getRequest_id() {
@@ -136,7 +137,7 @@ public class Credit {
 				+ ", lender_five=" + lenderFive + ", number_of_lenders=" + numberOfLenders + ", date_of_deposite="
 				+ date_of_deposite + "]";
 	}
-	public Credit(Integer credit_id, Integer user_id, Double inicial_amount, Double current_amount, Integer request_id,
+	public Credit(Integer credit_id, Integer user_id, BigDecimal inicial_amount, BigDecimal current_amount, Integer request_id,
 			Integer number_of_payments_left, Double interest_rate, Integer lender_one, Integer lender_two,
 			Integer lender_three, Integer lender_four, Integer lender_five, Integer number_of_lenders,
 			Date date_of_deposite) {

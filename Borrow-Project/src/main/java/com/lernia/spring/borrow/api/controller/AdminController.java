@@ -24,9 +24,13 @@ public class AdminController {
 
 	@Autowired
 	HttpSession session;
+	
+	
+	@Autowired
+	BorrowProjectCreditAppProxy bpcap;
 
 	@Autowired
-	private BorrowRepository borrowRepository2;
+	BorrowRepository borrowRepository2;
 
 	@Autowired
 	BorrowService borrowService;
@@ -45,6 +49,25 @@ public class AdminController {
 		Borrow borrow = borrowRepository2.getOne(id);
 		borrow.setStatus(Status.APPROVED.toString());
 		borrowRepository2.save(borrow);
+		
+		//change it when we know the issue
+		int temporalUserId = 1;
+		
+		BorrowProjectBean bpb = new BorrowProjectBean();
+		
+		
+		bpb.setInicial_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount())));
+		bpb.setCurrent_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount())));
+		bpb.setInterest_rate(30.00);
+		bpb.setNumber_of_payments_left(borrow.getPeriod());
+		bpb.setRequest_id(borrow.getBorrowId());
+		bpb.setUser_id(borrow.getUserId());
+		bpb.setNumberOfLenders(0);
+		
+		System.out.println(bpb);
+		
+		bpcap.makeACredit(bpb);
+		
 		return "redirect:show-all-borrows";
 	}
 

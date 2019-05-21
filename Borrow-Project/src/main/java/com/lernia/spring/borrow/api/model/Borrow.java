@@ -17,9 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@NoArgsConstructor
+
 @Entity
 @Table(name = "borrow_requests")
 @DynamicUpdate
@@ -84,5 +82,90 @@ public class Borrow {
 				+ ", requested_time=" + requestedTime + ", eligible=" + eligible + ", reason=" + reason + ", status="
 				+ status + "]";
 	}
+
+	public int getBorrowId() {
+		return borrowId;
+	}
+
+	public void setBorrowId(int borrowId) {
+		this.borrowId = borrowId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getRequestedAmount() {
+		return requestedAmount;
+	}
+
+	public void setRequestedAmount(int requestedAmount) {
+		this.requestedAmount = requestedAmount;
+	}
+
+	public int getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(int period) {
+		this.period = period;
+	}
+
+	public LocalDate getRequestedDate() {
+		return requestedDate;
+	}
+
+	public void setRequestedDate(LocalDate requestedDate) {
+		this.requestedDate = requestedDate;
+	}
+
+	public Instant getRequestedTime() {
+		return requestedTime;
+	}
+
+	public void setRequestedTime(Instant requestedTime) {
+		this.requestedTime = requestedTime;
+	}
+
+	public Boolean getEligible() {
+		return eligible;
+	}
+
+	public void setEligible(Boolean eligible) {
+		this.eligible = eligible;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public Borrow() {
+		
+	}
+	
 
 }

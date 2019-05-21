@@ -2,6 +2,8 @@ package com.helpmeout.depositeMoney;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ public class depositeMoneyController {
 	@Autowired
 	private AccountAppProxy proxy;
 	
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	Date date = new Date();
 	
@@ -42,7 +46,12 @@ public class depositeMoneyController {
 		depositeMoneyBean.setEnd_user_money(1);
 		depositeMoneyBean.setCurrent_amount(null);
 		
+		
+		
 		proxy.makeTransaction(depositeMoneyBean);
+	
+		
+
 		
 		return "redirect:/thanksfordeposite";
 	}

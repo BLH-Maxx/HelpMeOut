@@ -13,5 +13,14 @@ public class indexController {
 		
 		return "index";
 	}
+	
+	@GetMapping("/trying")
+	public String trying(Model trying) {
+		
+		
+		return "trying";
+	}
+	
+	
 
 }
