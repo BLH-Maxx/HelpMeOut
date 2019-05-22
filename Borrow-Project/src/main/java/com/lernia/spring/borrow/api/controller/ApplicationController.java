@@ -1,6 +1,7 @@
 package com.lernia.spring.borrow.api.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.lernia.spring.borrow.api.model.Borrow;
+import com.lernia.spring.borrow.api.model.Borrow.Status;
 import com.lernia.spring.borrow.api.repository.BorrowRepository;
 import com.lernia.spring.borrow.api.service.BorrowService;
 
@@ -84,8 +86,8 @@ public class ApplicationController {
 			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Samer " + borrow.toString());
 		Map<String, String> messages = new HashMap<String, String>();
-		if (bindingResult.hasErrors()){
-			messages.put("error", "error");	
+		if (bindingResult.hasErrors()) {
+			messages.put("error", "error");
 			messages.put("errorMessage", "Somthing went wrong, please try again or contact administrator");
 			request.setAttribute("messages", messages);
 		}
@@ -110,4 +112,19 @@ public class ApplicationController {
 	public String showDashboard(HttpServletRequest request, HttpServletResponse response) {
 		return "dashboard";
 	}
+
+	@GetMapping("/lend-Money")
+	public String getAllRejected(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Borrow> lendableBorrows = borrowRepository.findAllLendable(5, "REJECTED");
+		request.setAttribute("borrows", lendableBorrows);
+		return "/rejectedborrows";
+	}
+
+	@GetMapping("/lend") // Here here here
+	public String approveBorrow(int id, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		return borrowService.doLend(id);
+	}
+
 }

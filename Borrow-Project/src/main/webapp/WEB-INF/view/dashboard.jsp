@@ -35,6 +35,7 @@
 				<li class="active"><a href="/welcome">Home</a></li>
 				<li><a href="/borrow">Borrow</a></li>
 				<li><a href="/show-my-borrows?userName=<%= userName %>">My Borrows</a></li>
+				<li><a href="/lend-Money">Lend Money</a></li>
 			</ul>
 		</div>
 	</nav>

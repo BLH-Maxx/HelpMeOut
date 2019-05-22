@@ -42,7 +42,7 @@
 		</div>
 	</nav>
 
-	<div class="container text-center" id="tasksDiv">
+	<div class="container-fluid text-center" id="tasksDiv">
 		<h3>All Borrows Requests</h3>
 		<hr>
 		<a href="/admin/show-all-borrows" class="btn btn-primary" role="button">All</a> 
@@ -58,12 +58,19 @@
 						<th>User Id</th>
 						<th>UserName</th>
 						<th>Requested Amount</th>
+						<th>Remaining Amount</th>
 						<th>Period</th>
 						<th>Requested Date</th>
 						<th>Requested Time</th>
 						<th>Eligible</th>
 						<th>Reason</th>
 						<th>Status</th>
+						
+						<th>Lender 1</th>
+						<th>Lender 2</th>
+						<th>Lender 3</th>
+						<th>Lender 4</th>
+						<th>Lender 5</th>
 						<th>Approve</th>
 						<th>Reject</th>
 					</tr>
@@ -75,12 +82,18 @@
 							<td>${borrow.userId}</td>
 							<td>${borrow.userName}</td>
 							<td>${borrow.requestedAmount}</td>
+							<td>${borrow.remainingAmount}</td>
 							<td>${borrow.period}</td>
 							<td>${borrow.requestedDate}</td>
 							<td>${borrow.requestedTime}</td>
 							<td>${borrow.eligible}</td>
 							<td>${borrow.reason}</td>
 							<td>${borrow.status}</td>
+							<td>${borrow.lenderOneId}</td>
+							<td>${borrow.lenderTwoId}</td>
+							<td>${borrow.lenderThreeId}</td>
+							<td>${borrow.lenderFourId}</td>
+							<td>${borrow.lenderFiveId}</td>
 							<td><a href="/admin/approve-borrow?id=${borrow.borrowId}"><span
 									class="glyphicon glyphicon-ok"></span></a></td>
 							<td><a href="/admin/reject-borrow?id=${borrow.borrowId}"><span

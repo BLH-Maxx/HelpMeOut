@@ -37,25 +37,25 @@ public class BorrowService {
 
 	public List<Borrow> showAllborrows() {
 		List<Borrow> borrows = new ArrayList<Borrow>();
-		borrows = borrowRepository.findAll(); 	
+		borrows = borrowRepository.findAll();
 		return borrows;
 	}
-	
+
 	public List<Borrow> showAllApproved() {
 		List<Borrow> borrows = new ArrayList<Borrow>();
-		borrows = borrowRepository.findAllByStatus("APPROVED"); 	
+		borrows = borrowRepository.findAllByStatus("APPROVED");
 		return borrows;
 	}
-	
+
 	public List<Borrow> showAllRejected() {
 		List<Borrow> borrows = new ArrayList<Borrow>();
-		borrows = borrowRepository.findAllByStatus("REJECTED"); 	
+		borrows = borrowRepository.findAllByStatus("REJECTED");
 		return borrows;
 	}
-	
+
 	public List<Borrow> showAllPendings() {
 		List<Borrow> borrows = new ArrayList<Borrow>();
-		borrows = borrowRepository.findAllByStatus("PENDING"); 	
+		borrows = borrowRepository.findAllByStatus("PENDING");
 		return borrows;
 	}
 
@@ -73,6 +73,13 @@ public class BorrowService {
 		borrow.setRequestedDate(LocalDate.now());
 		borrow.setRequestedTime(Instant.now());
 		borrow.setStatus(Status.PENDING.toString());
+		borrow.setRemainingAmount(borrow.getRequestedAmount());
+		borrow.setLenderOneId(0);
+		borrow.setLenderTwoId(0);
+		borrow.setLenderThreeId(0);
+		borrow.setLenderFourId(0);
+		borrow.setLenderFiveId(0);
+		borrow.setNumberOfLenders(0);
 		System.out.println(borrow.toString());
 		System.out.println("DTF === " + dtf);
 		System.out.println("NOW === " + now);
@@ -94,4 +101,38 @@ public class BorrowService {
 
 	}
 
+	public String doLend(int id) {
+		
+		Borrow borrow = borrowRepository.findAllByborrow_id(id);
+		if (borrow.getNumberOfLenders() == 5) {
+			return "dashboard";
+		}
+		
+		int section = borrow.getRequestedAmount() / 5;
+		borrow.setRemainingAmount(borrow.getRemainingAmount() - section);
+		int lender1 = borrow.getLenderOneId();
+		int lender2 = borrow.getLenderTwoId();
+		int lender3 = borrow.getLenderThreeId();
+		int lender4 = borrow.getLenderFourId();
+		int lender5 = borrow.getLenderFiveId();
+
+		if (lender1 == 0) {
+			borrow.setLenderOneId(borrow.getUserId());
+			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
+		} else if (lender2 == 0) {
+			borrow.setLenderTwoId(borrow.getUserId());
+			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
+		} else if (lender3 == 0) {
+			borrow.setLenderThreeId(borrow.getUserId());
+			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
+		} else if (lender4 == 0) {
+			borrow.setLenderFourId(borrow.getUserId());
+			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
+		} else if (lender5 == 0) {
+			borrow.setLenderFiveId(borrow.getUserId());
+			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
+		}
+
+		return "dashboard";
+	}
 }

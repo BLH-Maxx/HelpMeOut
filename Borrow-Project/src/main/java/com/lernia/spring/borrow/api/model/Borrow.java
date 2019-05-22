@@ -41,6 +41,10 @@ public class Borrow {
 	@NotNull
 	@Column(name = "requested_amount")
 	private int requestedAmount;
+	
+	@NotNull
+	@Column(name = "remaining_amount")
+	private int remainingAmount;
 
 	@NotNull
 	@Column(name = "period")
@@ -69,6 +73,24 @@ public class Borrow {
 	@NotNull
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "lender_one")
+	private Integer lenderOneId;
+	
+	@Column(name = "lender_two")
+	private Integer lenderTwoId;
+	
+	@Column(name = "lender_three")
+	private Integer lenderThreeId;
+	
+	@Column(name = "lender_four")
+	private Integer lenderFourId;
+	
+	@Column(name = "lender_five")
+	private Integer lenderFiveId;
+	
+	@Column(name = "number_of_lenders")
+	private Integer numberOfLenders;
 
 	public Borrow(@NotNull int requested_amount, @NotNull int period, @NotNull String reason) {
 		super();

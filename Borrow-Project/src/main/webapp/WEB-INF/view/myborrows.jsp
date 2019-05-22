@@ -35,8 +35,10 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
+
 				<li><a href="/borrow">Borrow</a></li>
-				<li><a href="/show-my-borrows?userName=<%= userName %>">My Borrows</a></li>
+				<li><a href="/show-my-borrows?userName=<%=userName%>">My
+						Borrows</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -52,6 +54,7 @@
 						<th>User Id</th>
 						<th>UserName</th>
 						<th>Requested Amount</th>
+						<th>Remaining Amount</th>
 						<th>Period</th>
 						<th>Requested Date</th>
 						<th>Requested Time</th>
@@ -66,6 +69,7 @@
 							<td>${borrow.userId}</td>
 							<td>${borrow.userName}</td>
 							<td>${borrow.requestedAmount}</td>
+							<td>${borrow.remainingAmount}</td>
 							<td>${borrow.period}</td>
 							<td>${borrow.requestedDate}</td>
 							<td>${borrow.requestedTime}</td>
