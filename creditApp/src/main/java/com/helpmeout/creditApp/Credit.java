@@ -44,119 +44,259 @@ public class Credit {
 	private Integer numberOfLenders;
 	
 	private Date date_of_deposite;
-	public Integer getCredit_id() {
+	private Double next_payment;
+	
+	
+	
+	
+	public Credit(Integer creditId, Integer userId, BigDecimal inicial_amount, BigDecimal current_amount,
+			Integer request_id, Integer number_of_payments_left, Double interest_rate, Integer lenderOne,
+			Integer lenderTwo, Integer lenderThree, Integer lenderFour, Integer lenderFive, Integer numberOfLenders,
+			Date date_of_deposite, Double next_payment) {
+		super();
+		this.creditId = creditId;
+		this.userId = userId;
+		this.inicial_amount = inicial_amount;
+		this.current_amount = current_amount;
+		this.request_id = request_id;
+		this.number_of_payments_left = number_of_payments_left;
+		this.interest_rate = interest_rate;
+		this.lenderOne = lenderOne;
+		this.lenderTwo = lenderTwo;
+		this.lenderThree = lenderThree;
+		this.lenderFour = lenderFour;
+		this.lenderFive = lenderFive;
+		this.numberOfLenders = numberOfLenders;
+		this.date_of_deposite = date_of_deposite;
+		this.next_payment = next_payment;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Credit [creditId=" + creditId + ", userId=" + userId + ", inicial_amount=" + inicial_amount
+				+ ", current_amount=" + current_amount + ", request_id=" + request_id + ", number_of_payments_left="
+				+ number_of_payments_left + ", interest_rate=" + interest_rate + ", lenderOne=" + lenderOne
+				+ ", lenderTwo=" + lenderTwo + ", lenderThree=" + lenderThree + ", lenderFour=" + lenderFour
+				+ ", lenderFive=" + lenderFive + ", numberOfLenders=" + numberOfLenders + ", date_of_deposite="
+				+ date_of_deposite + ", next_payment=" + next_payment + "]";
+	}
+
+
+
+
+	public Integer getCreditId() {
 		return creditId;
 	}
-	public void setCredit_id(Integer credit_id) {
-		this.creditId = credit_id;
+
+
+
+
+	public void setCreditId(Integer creditId) {
+		this.creditId = creditId;
 	}
-	public Integer getUser_id() {
+
+
+
+
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUser_id(Integer user_id) {
-		this.userId = user_id;
+
+
+
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
+
+
+
+
 	public BigDecimal getInicial_amount() {
 		return inicial_amount;
 	}
+
+
+
+
 	public void setInicial_amount(BigDecimal inicial_amount) {
 		this.inicial_amount = inicial_amount;
 	}
+
+
+
+
 	public BigDecimal getCurrent_amount() {
 		return current_amount;
 	}
+
+
+
+
 	public void setCurrent_amount(BigDecimal current_amount) {
 		this.current_amount = current_amount;
 	}
+
+
+
+
 	public Integer getRequest_id() {
 		return request_id;
 	}
+
+
+
+
 	public void setRequest_id(Integer request_id) {
 		this.request_id = request_id;
 	}
+
+
+
+
 	public Integer getNumber_of_payments_left() {
 		return number_of_payments_left;
 	}
+
+
+
+
 	public void setNumber_of_payments_left(Integer number_of_payments_left) {
 		this.number_of_payments_left = number_of_payments_left;
 	}
+
+
+
+
 	public Double getInterest_rate() {
 		return interest_rate;
 	}
+
+
+
+
 	public void setInterest_rate(Double interest_rate) {
 		this.interest_rate = interest_rate;
 	}
-	public Integer getLender_one() {
+
+
+
+
+	public Integer getLenderOne() {
 		return lenderOne;
 	}
-	public void setLender_one(Integer lender_one) {
-		this.lenderOne = lender_one;
+
+
+
+
+	public void setLenderOne(Integer lenderOne) {
+		this.lenderOne = lenderOne;
 	}
-	public Integer getLender_two() {
+
+
+
+
+	public Integer getLenderTwo() {
 		return lenderTwo;
 	}
-	public void setLender_two(Integer lender_two) {
-		this.lenderTwo = lender_two;
+
+
+
+
+	public void setLenderTwo(Integer lenderTwo) {
+		this.lenderTwo = lenderTwo;
 	}
-	public Integer getLender_three() {
+
+
+
+
+	public Integer getLenderThree() {
 		return lenderThree;
 	}
-	public void setLender_three(Integer lender_three) {
-		this.lenderThree = lender_three;
+
+
+
+
+	public void setLenderThree(Integer lenderThree) {
+		this.lenderThree = lenderThree;
 	}
-	public Integer getLender_four() {
+
+
+
+
+	public Integer getLenderFour() {
 		return lenderFour;
 	}
-	public void setLender_four(Integer lender_four) {
-		this.lenderFour = lender_four;
+
+
+
+
+	public void setLenderFour(Integer lenderFour) {
+		this.lenderFour = lenderFour;
 	}
-	public Integer getLender_five() {
+
+
+
+
+	public Integer getLenderFive() {
 		return lenderFive;
 	}
-	public void setLender_five(Integer lender_five) {
-		this.lenderFive = lender_five;
+
+
+
+
+	public void setLenderFive(Integer lenderFive) {
+		this.lenderFive = lenderFive;
 	}
-	public Integer getNumber_of_lenders() {
+
+
+
+
+	public Integer getNumberOfLenders() {
 		return numberOfLenders;
 	}
-	public void setNumber_of_lenders(Integer number_of_lenders) {
-		this.numberOfLenders = number_of_lenders;
+
+
+
+
+	public void setNumberOfLenders(Integer numberOfLenders) {
+		this.numberOfLenders = numberOfLenders;
 	}
+
+
+
+
 	public Date getDate_of_deposite() {
 		return date_of_deposite;
 	}
+
+
+
+
 	public void setDate_of_deposite(Date date_of_deposite) {
 		this.date_of_deposite = date_of_deposite;
 	}
-	@Override
-	public String toString() {
-		return "credit [credit_id=" + creditId + ", user_id=" + userId + ", inicial_amount=" + inicial_amount
-				+ ", current_amount=" + current_amount + ", request_id=" + request_id + ", number_of_payments_left="
-				+ number_of_payments_left + ", interest_rate=" + interest_rate + ", lender_one=" + lenderOne
-				+ ", lender_two=" + lenderTwo + ", lender_three=" + lenderThree + ", lender_four=" + lenderFour
-				+ ", lender_five=" + lenderFive + ", number_of_lenders=" + numberOfLenders + ", date_of_deposite="
-				+ date_of_deposite + "]";
+
+
+
+
+	public Double getNext_payment() {
+		return next_payment;
 	}
-	public Credit(Integer credit_id, Integer user_id, BigDecimal inicial_amount, BigDecimal current_amount, Integer request_id,
-			Integer number_of_payments_left, Double interest_rate, Integer lender_one, Integer lender_two,
-			Integer lender_three, Integer lender_four, Integer lender_five, Integer number_of_lenders,
-			Date date_of_deposite) {
-		this.creditId = credit_id;
-		this.userId = user_id;
-		this.inicial_amount = inicial_amount;
-		this.current_amount = current_amount;
-		this.request_id = request_id;
-		this.number_of_payments_left = number_of_payments_left;
-		this.interest_rate = interest_rate;
-		this.lenderOne = lender_one;
-		this.lenderTwo = lender_two;
-		this.lenderThree = lender_three;
-		this.lenderFour = lender_four;
-		this.lenderFive = lender_five;
-		this.numberOfLenders = number_of_lenders;
-		this.date_of_deposite = date_of_deposite;
+
+
+
+
+	public void setNext_payment(Double next_payment) {
+		this.next_payment = next_payment;
 	}
-	
+
+
+
+
 	public Credit() {
 		
 	}

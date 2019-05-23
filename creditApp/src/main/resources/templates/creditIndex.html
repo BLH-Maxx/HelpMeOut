@@ -89,15 +89,11 @@ crossorigin="anonymous">
 							
 						</tr>
 						<tr th:each="CurrentCredits : ${currentCredits}">
-							<td th:text="${CurrentCredits.credit_id}"></td>
+							<td th:text="${CurrentCredits.creditId}"></td>
 							<td th:text="'$'+${CurrentCredits.current_amount}"></td>
 							<td th:text="${CurrentCredits.number_of_payments_left}"></td>
-							<td th:text="${ #numbers.formatCurrency( (CurrentCredits.current_amount * ((CurrentCredits.interest_rate / 12)/100)) / 
-							( (((((CurrentCredits.interest_rate / 12)/100)) + 1)^CurrentCredits.number_of_payments_left) - 1 ) + 
-							( (CurrentCredits.current_amount * ((CurrentCredits.interest_rate / 12)/100)) ) )
-							}"></td>
 							<td>
-								<form th:action="@{'/mycredit/' + ${CurrentCredits.credit_id}}" method="post">
+								<form th:action="@{'/mycredit/' + ${CurrentCredits.creditId}}" method="post">
 					              <p><input type="submit" value="Submit"/></p>
          					    </form>
 							
