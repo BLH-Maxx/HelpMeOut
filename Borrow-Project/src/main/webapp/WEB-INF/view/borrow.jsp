@@ -39,11 +39,6 @@
 		<h3>New Borrow Request</h3>
 		<hr>
 
-		<c:if test="${isExist == true}">
-			<span class="alert alert-danger" role="alert">${messages.AlreadyExist}</span>
-		</c:if>
-
-
 		<br> <br>
 		<form class="form-horizontal" method="POST" action="borrow-request">
 			<input type="hidden" name="id" value="${borrow.borrowId}" />

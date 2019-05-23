@@ -22,12 +22,13 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
+				<li class="active"><a href="http://localhost:8000/">Zulu</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/admin/admin-dashboard"><span
-						class="glyphicon glyphicon-tower"></span>  Admin Dashboard</a></li>
+						class="glyphicon glyphicon-tower"></span> Admin Dashboard</a></li>
 				<li><a href="/my-dashboard"><span
-						class="glyphicon glyphicon-dashboard"></span>  User Dashboard</a></li>
+						class="glyphicon glyphicon-dashboard"></span> User Dashboard</a></li>
 			</ul>
 		</div>
 	</nav>

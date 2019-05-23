@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=windows-1256"
 	pageEncoding="windows-1256"%>
 <!DOCTYPE html>
+<%@page import="org.springframework.security.core.Authentication"%>
+<%@page
+	import="org.springframework.security.core.context.SecurityContextHolder"%>
 
 <%
 	response.setHeader("Cache-Control", "no-cache");
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Pragma", "no-cache");
 	response.setDateHeader("Expires", 0);
+	Authentication auth2 = SecurityContextHolder.getContext().getAuthentication();
+	String userName = auth2.getName();
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -30,47 +35,39 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/welcome">Home</a></li>
-				<li><a href="/borrow">Borrrow</a></li>
-				<li><a
-					href="/show-my-borrows?id=<%=session.getAttribute("user_id")%>">My Borrows</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/register"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><a href="/login"><span
-						class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<div class="container text-center" id="tasksDiv">
-		<h3>All Borrows Requests</h3>
+		<h3>All Rejected Requests</h3>
 		<hr>
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th>Borrow Id</th>
-						<th>User Id</th>
-						<th>UserName</th>
-						<th>Email</th>
 						<th>Requested Amount</th>
-						<th>Reason</th>
-						<th>Status</th>
+						<th>Remaining Amount</th>
+						<th>Period</th>
 						<th>Requested Date</th>
+						<th>Requested Time</th>
+						<th>Reason</th>
+						<th>Lend</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="borrow" items="${borrows}">
 						<tr>
-							<td>${borrow.borrow_id}</td>
-							<td>${user.user_id}</td>
-							<td>${borrow.user_name}</td>
-							<td>${user.email}</td>
-							<td>${borrow.requested_amount}</td>
+							<td>${borrow.borrowId}</td>
+							<td>${borrow.requestedAmount}</td>
+							<td>${borrow.remainingAmount}</td>
+							<td>${borrow.period}</td>
+							<td>${borrow.requestedDate}</td>
+							<td>${borrow.requestedTime}</td>
 							<td>${borrow.reason}</td>
-							<td>${borrow.status}</td>
-							<td>${borrow.requested_date}</td>
+							<td><a href="/lend?id=${borrow.borrowId}"><span
+									class="glyphicon glyphicon-usd"></span></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -138,6 +138,8 @@ public class ApplicationController {
 	public static HttpSession session() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		System.out.println("att  " + attr);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("Auth = " + auth.toString());
 		return attr.getRequest().getSession(true); // true == allow create
 	}
 

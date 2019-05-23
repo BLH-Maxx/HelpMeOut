@@ -12,10 +12,13 @@ import com.lernia.spring.borrow.api.model.Borrow;
 public interface BorrowRepository extends JpaRepository<Borrow, Integer> {
 
 	@Query(value = "SELECT * FROM borrow_requests WHERE borrow_id = ?1", nativeQuery = true)
-	public List<Borrow> findAllByborrow_id(int id);
+	public Borrow findAllByborrow_id(int id);
 
 	public List<Borrow> findAllByUserName(String user_name);
 
 	public List<Borrow> findAllByStatus(String string);
+	
+	@Query(value = "SELECT * FROM borrow_requests WHERE number_of_lenders < ?1 AND status = ?2", nativeQuery = true)
+	public List<Borrow> findAllLendable(int id, String status);
 
 }
