@@ -13,11 +13,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
 @Entity
 @Table(name = "borrow_requests")
 @DynamicUpdate
@@ -105,6 +100,8 @@ public class Borrow {
 				+ status + "]";
 	}
 
+
+	
 	public int getBorrowId() {
 		return borrowId;
 	}
@@ -135,6 +132,14 @@ public class Borrow {
 
 	public void setRequestedAmount(int requestedAmount) {
 		this.requestedAmount = requestedAmount;
+	}
+
+	public int getRemainingAmount() {
+		return remainingAmount;
+	}
+
+	public void setRemainingAmount(int remainingAmount) {
+		this.remainingAmount = remainingAmount;
 	}
 
 	public int getPeriod() {
@@ -184,7 +189,55 @@ public class Borrow {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	public Integer getLenderOneId() {
+		return lenderOneId;
+	}
+
+	public void setLenderOneId(Integer lenderOneId) {
+		this.lenderOneId = lenderOneId;
+	}
+
+	public Integer getLenderTwoId() {
+		return lenderTwoId;
+	}
+
+	public void setLenderTwoId(Integer lenderTwoId) {
+		this.lenderTwoId = lenderTwoId;
+	}
+
+	public Integer getLenderThreeId() {
+		return lenderThreeId;
+	}
+
+	public void setLenderThreeId(Integer lenderThreeId) {
+		this.lenderThreeId = lenderThreeId;
+	}
+
+	public Integer getLenderFourId() {
+		return lenderFourId;
+	}
+
+	public void setLenderFourId(Integer lenderFourId) {
+		this.lenderFourId = lenderFourId;
+	}
+
+	public Integer getLenderFiveId() {
+		return lenderFiveId;
+	}
+
+	public void setLenderFiveId(Integer lenderFiveId) {
+		this.lenderFiveId = lenderFiveId;
+	}
+
+	public Integer getNumberOfLenders() {
+		return numberOfLenders;
+	}
+
+	public void setNumberOfLenders(Integer numberOfLenders) {
+		this.numberOfLenders = numberOfLenders;
+	}
+
 	public Borrow() {
 		
 	}
