@@ -20,12 +20,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.lernia.spring.borrow.api.model.Borrow;
 import com.lernia.spring.borrow.api.service.BorrowService;
+import com.netflix.discovery.DiscoveryClient;
 
 @RestController
 public class ApplicationRestController {
 
 	@Autowired
 	private BorrowService borrowService;
+	
+	@Autowired
+	private BorrowProjectAuthProxy borrowProjectAuthProxy;
+	
+	@GetMapping("/getsaldofromauth")
+	public String getSaldo() {
+		return borrowProjectAuthProxy.getSaldo();
+	}
+	
+	@GetMapping("/getauthfromauth")
+	public String getAuth() {
+		return borrowProjectAuthProxy.getAuth();
+	}
+	
 
 	@GetMapping("/rest-get-all-borrows")
 	public List<Borrow> findAllBorrows() {
