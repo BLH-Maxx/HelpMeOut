@@ -55,9 +55,8 @@ public class AdminController {
 		
 		BorrowProjectBean bpb = new BorrowProjectBean();
 		
-		
 		bpb.setInicial_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount())));
-		bpb.setCurrent_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount())));
+		bpb.setCurrent_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount()))); //Ghaiath
 		bpb.setInterest_rate(30.00);
 		bpb.setNumber_of_payments_left(borrow.getPeriod());
 		bpb.setRequest_id(borrow.getBorrowId());

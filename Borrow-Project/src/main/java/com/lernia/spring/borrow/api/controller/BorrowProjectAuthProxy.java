@@ -10,7 +10,10 @@ public interface BorrowProjectAuthProxy {
 	@GetMapping("/getsaldo")
 	public String getSaldo();
 	
-	@GetMapping("/getAuth")
-	public String getAuth();
+	@GetMapping("/getAuthName")
+	public String getAuthName();
+	
+	@GetMapping("/getAuthId")
+	public int getAuthId();
 	
 }

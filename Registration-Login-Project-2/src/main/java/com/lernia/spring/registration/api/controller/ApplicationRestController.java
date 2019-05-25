@@ -45,10 +45,18 @@ public class ApplicationRestController {
 
 	}
 	
-	@GetMapping("/getAuth")
-	public String getAuth() {
+	@GetMapping("/getAuthName")
+	public String getAuthName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return auth.toString();
+		return auth.getName();
+
+	}
+	
+	@GetMapping("/getAuthId")
+	public int getAuthId() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findByUserName(auth.getName());
+		return user.getUser_id();
 
 	}
 	
