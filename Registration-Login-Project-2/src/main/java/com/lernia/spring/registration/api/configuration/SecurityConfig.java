@@ -63,19 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeRequests()
-				.antMatchers("/welcome", "/register", "/login").permitAll()
-				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.and()
-				.formLogin()
-				.loginProcessingUrl("/login-user")
-				.loginPage("/login")
-				.defaultSuccessUrl("/my-dashboard")
-				.usernameParameter("userName")
-				.passwordParameter("password")
-				.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
+		http.csrf().disable().authorizeRequests().antMatchers("*").permitAll();
 	}
 
 	@Override
