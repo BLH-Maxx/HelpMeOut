@@ -33,7 +33,7 @@
 			</div>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="/welcome">Home</a></li>
-				<li><a href="/admin/show-all-borrows">All Borrrow</a></li>
+				<li><a href="/admin/show-all-borrows">All Borrow</a></li>
 			</ul>
 		</div>
 	</nav>
