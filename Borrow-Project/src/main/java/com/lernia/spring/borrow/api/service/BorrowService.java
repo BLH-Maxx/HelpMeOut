@@ -105,7 +105,7 @@ public class BorrowService {
 		
 		Borrow borrow = borrowRepository.findAllByborrow_id(id);
 		if (borrow.getNumberOfLenders() == 5) {
-			return "dashboard";
+			return "redirect:my-dashboard";
 		}
 		
 		int section = borrow.getRequestedAmount() / 5;
@@ -133,6 +133,6 @@ public class BorrowService {
 			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
 		}
 
-		return "dashboard";
+		return "redirect:my-dashboard";
 	}
 }

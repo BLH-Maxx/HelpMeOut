@@ -31,7 +31,7 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/admin/admin-dashboard">Admin Dashboard</a>
 			</div>
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav navbar-right">
 				<li class="active"><a href="/welcome">Home</a></li>
 				<li><a href="/admin/show-all-borrows">All Borrrow</a></li>
 			</ul>

@@ -40,7 +40,7 @@ public class AdminController {
 			throws ServletException, IOException {
 		List<Borrow> allBorrows = borrowService.showAllborrows();
 		request.setAttribute("borrows", allBorrows);
-		return "/allborrows";
+		return "/allborrows2";
 	}
 
 	@GetMapping("/approve-borrow")
@@ -60,7 +60,8 @@ public class AdminController {
 		bpb.setInterest_rate(30.00);
 		bpb.setNumber_of_payments_left(borrow.getPeriod());
 		bpb.setRequest_id(borrow.getBorrowId());
-		bpb.setUser_id(borrow.getUserId());
+		bpb.setUserId(borrow.getUserId());	
+		System.out.println("USERID =====" + borrow.getUserId());
 		bpb.setNumberOfLenders(0);
 		
 		System.out.println(bpb);
@@ -84,7 +85,7 @@ public class AdminController {
 			throws ServletException, IOException {
 		List<Borrow> allBorrows = borrowService.showAllApproved();
 		request.setAttribute("borrows", allBorrows);
-		return "/allborrows";
+		return "/allborrows2";
 	}
 	
 	@GetMapping("/show-all-rejected")
@@ -92,7 +93,7 @@ public class AdminController {
 			throws ServletException, IOException {
 		List<Borrow> allBorrows = borrowService.showAllRejected();
 		request.setAttribute("borrows", allBorrows);
-		return "/allborrows";
+		return "/allborrows2";
 	}
 	
 	@GetMapping("/show-all-pendings")
@@ -100,7 +101,7 @@ public class AdminController {
 			throws ServletException, IOException {
 		List<Borrow> allBorrows = borrowService.showAllPendings();
 		request.setAttribute("borrows", allBorrows);
-		return "/allborrows";
+		return "/allborrows2";
 	}
 
 	@GetMapping("/admin-dashboard")

@@ -33,22 +33,22 @@ public class creditController {
 
 		List<Credit> findAllByUserId = credit.findAllByUserId(theUserId);
 
-		// See here if it's better??
-		for (Credit credit : findAllByUserId) {
-			BigDecimal current_amount = credit.getCurrent_amount();
-			Double doubleAmountToPay;
-
-			if (current_amount != BigDecimal.ZERO) {
-				doubleAmountToPay = current_amount.doubleValue();
-			} else {
-				doubleAmountToPay = 0.00;
-			}
-
-			double amountToPay = amountToPay(doubleAmountToPay, credit.getInterest_rate(),
-					credit.getNumber_of_payments_left());
-
-			credit.setNext_payment(amountToPay);
-		}
+//		// See here if it's better??
+//		for (Credit credit : findAllByUserId) {
+//			BigDecimal current_amount = credit.getCurrent_amount();
+//			Double doubleAmountToPay;
+//
+//			if (current_amount != BigDecimal.ZERO) {
+//				doubleAmountToPay = current_amount.doubleValue();
+//			} else {
+//				doubleAmountToPay = 0.00;
+//			}
+//
+//			double amountToPay = amountToPay(doubleAmountToPay, credit.getInterest_rate(),
+//					credit.getNumber_of_payments_left());
+//
+//			credit.setNext_payment(amountToPay);
+//		}
 
 		for (int i = 0; i < findAllByUserId.size(); i++) {
 
