@@ -63,6 +63,12 @@ public class AdminController {
 		bpb.setUserId(borrow.getUserId());	
 		System.out.println("USERID =====" + borrow.getUserId());
 		bpb.setNumberOfLenders(0);
+		bpb.setLenderOne(borrow.getLenderOneId());
+		bpb.setLenderTwo(borrow.getLenderTwoId());
+		bpb.setLenderThree(borrow.getLenderThreeId());
+		bpb.setLenderFour(borrow.getLenderFourId());
+		bpb.setLenderFive(borrow.getLenderFiveId());
+		bpb.setNext_payment(borrow.getRequestedAmount() / 5.00);
 		
 		System.out.println(bpb);
 		
