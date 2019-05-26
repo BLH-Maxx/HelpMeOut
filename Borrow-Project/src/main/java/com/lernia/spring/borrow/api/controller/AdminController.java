@@ -69,6 +69,7 @@ public class AdminController {
 		bpb.setLenderFour(borrow.getLenderFourId());
 		bpb.setLenderFive(borrow.getLenderFiveId());
 		bpb.setNext_payment(borrow.getRequestedAmount() / 5.00);
+		bpb.setNumberOfLenders(borrow.getNumberOfLenders());
 		
 		System.out.println(bpb);
 		
