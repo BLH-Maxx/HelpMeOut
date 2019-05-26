@@ -27,6 +27,24 @@ public class ApplicationRestController {
 	@Autowired
 	private BorrowService borrowService;
 
+	@Autowired
+	private BorrowProjectAuthProxy borrowProjectAuthProxy;
+
+	@GetMapping("/getsaldofromauth")
+	public String getSaldo() {
+		return borrowProjectAuthProxy.getSaldo();
+	}
+
+	@GetMapping("/getauthname")
+	public String getAuthName() {
+		return borrowProjectAuthProxy.getAuthName();
+	}
+
+	@GetMapping("/getauthid")
+	public int getAuthId() {
+		return borrowProjectAuthProxy.getAuthId();
+	}
+
 	@GetMapping("/rest-get-all-borrows")
 	public List<Borrow> findAllBorrows() {
 		return borrowService.showAllborrows();
@@ -36,7 +54,7 @@ public class ApplicationRestController {
 	public List<Borrow> findAllApproved() {
 		return borrowService.showAllApproved();
 	}
-	
+
 	@GetMapping("/rest-get-all-pendings")
 	public List<Borrow> findAllPendings() {
 		return borrowService.showAllPendings();

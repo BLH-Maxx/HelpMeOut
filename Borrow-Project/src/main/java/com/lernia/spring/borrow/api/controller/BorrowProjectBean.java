@@ -1,11 +1,8 @@
 package com.lernia.spring.borrow.api.controller;
 
-import javax.persistence.Column;
-
 public class BorrowProjectBean {
 	
-private Integer creditId;
-
+	private Integer creditId;
 	private Integer user_id; 	
 	private Double inicial_amount;
 	private Double current_amount;
