@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 
 import com.lernia.spring.registration.api.model.User;
 import com.lernia.spring.registration.api.repository.UserRepository;
@@ -28,6 +30,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		UserDetailsPrincipal userPrincipal = new UserDetailsPrincipal(user);
 		System.out.println("User Principals = " + userPrincipal.getAuthorities().toString());
 		return userPrincipal;
+	}
+	
+	
+	public UserDetails getUserDetailsByUserName(String username) throws UsernameNotFoundException{ 
+		User userEntity = userRepository.findByuserName(username);
+		
+		if(userEntity == null) throw new UsernameNotFoundException(username);
+		
+		
+		
+		return new ModelMapper().map(userEntity, UserDetails.class);
 	}
 
 }
