@@ -70,7 +70,7 @@ public class AuthenticationJwtFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
     	
-    -
+    
     	
     	
     	String userName = ((User) auth.getPrincipal()).getUsername();
