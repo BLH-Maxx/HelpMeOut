@@ -3,8 +3,11 @@ package com.lernia.spring.registration.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,6 +61,17 @@ public class ApplicationRestController {
 		User user = userService.findByUserName(auth.getName());
 		return user.getUser_id();
 
+	}
+	
+	public class obteinUserSession {
+		@RequestMapping(value = "/loginds", method = RequestMethod.GET)
+		public String UserSession(ModelMap modelMap) {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			System.out.println(auth.toString());
+			String name = auth.getName();
+			modelMap.addAttribute("username", name);
+			return "hellos " + name;
+		}
 	}
 	
 
