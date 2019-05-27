@@ -123,17 +123,6 @@ public class ApplicationController {
 		}
 	}
 
-	public class obteinUserSession {
-		@RequestMapping(value = "/loginds", method = RequestMethod.GET)
-		public String UserSession(ModelMap modelMap) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			System.out.println(auth.toString());
-			String name = auth.getName();
-			modelMap.addAttribute("username", name);
-			return "hellos " + name;
-		}
-	}
-
 	@RequestMapping(value = "/samer", method = RequestMethod.GET)
 	public static HttpSession session() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
