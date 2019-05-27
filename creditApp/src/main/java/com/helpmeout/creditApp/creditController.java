@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -22,6 +23,8 @@ public class creditController {
 
 	@Autowired
 	private CreditAppAccountAppProxy proxy;
+	
+	
 
 	Date date = new Date();
 
@@ -31,8 +34,10 @@ public class creditController {
 	@GetMapping("/mycredit")
 	public String index(Model model) {
 
+		
 		List<Credit> findAllByUserId = credit.findAllByUserId(theUserId);
 
+		/*
 		// See here if it's better??
 		for (Credit credit : findAllByUserId) {
 			BigDecimal current_amount = credit.getCurrent_amount();
@@ -40,15 +45,17 @@ public class creditController {
 
 			if (current_amount != BigDecimal.ZERO) {
 				doubleAmountToPay = current_amount.doubleValue();
+				double amountToPay = amountToPay(doubleAmountToPay, credit.getInterest_rate(),
+						credit.getNumber_of_payments_left());
+
+				credit.setNext_payment(amountToPay);
 			} else {
 				doubleAmountToPay = 0.00;
+				credit.setNext_payment(doubleAmountToPay);
 			}
 
-			double amountToPay = amountToPay(doubleAmountToPay, credit.getInterest_rate(),
-					credit.getNumber_of_payments_left());
-
-			credit.setNext_payment(amountToPay);
-		}
+			
+		}*/
 
 		for (int i = 0; i < findAllByUserId.size(); i++) {
 
@@ -66,10 +73,13 @@ public class creditController {
 
 			findAllByUserId.get(i).setNext_payment(amountToPay);
 
+			
 		}
 
+		
 		model.addAttribute("currentCredits", findAllByUserId);
 		model.addAttribute("try", findAllByUserId.get(0).getInterest_rate());
+
 
 		return "creditIndex";
 	}
@@ -120,8 +130,12 @@ public class creditController {
 		cpb.setTransaction_type("Withdraw");
 		cpb.setAmount(String.valueOf(amountToPay * -1));
 		proxy.makeTransaction(cpb);
+		
+		
+		credit.putNewBalanceInCredit(amountToPay, cpb.getCredit_id());
+		
 
-		return "redirect:/thanksfordeposite";
+		return "redirect:/thanksforpayment";
 	}
 
 	public double amountToPay(Double amountLeft, Double interestRate, Integer paymentsLeft) {
@@ -133,6 +147,11 @@ public class creditController {
 
 		return result;
 
+	}
+	
+	@GetMapping("/thanksforpayment")
+	public String thanksForPayment(Model model) {
+		return "thanksfordeposite";
 	}
 
 }

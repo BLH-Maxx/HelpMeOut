@@ -82,7 +82,7 @@ crossorigin="anonymous">
 
 
 				<div class="container">
-					<form action="#" th:action="@{/makeadeposit}" th:object="${depositeMoneyBean}"
+					<form action="#" th:action="@{/depositemoney/makeadeposit}" th:object="${depositeMoneyBean}"
 						method="post">
 						<p>
 							Id: <input type="text" th:field="*{amount}" />

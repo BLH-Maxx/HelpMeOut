@@ -3,7 +3,7 @@ package com.lernia.spring.borrow.api.controller;
 public class BorrowProjectBean {
 	
 	private Integer creditId;
-	private Integer user_id; 	
+	private Integer userId; 	
 	private Double inicial_amount;
 	private Double current_amount;
 	private Integer request_id;
@@ -27,13 +27,15 @@ public class BorrowProjectBean {
 	}
 
 
-	public Integer getUser_id() {
-		return user_id;
+
+
+	public Integer getUserId() {
+		return userId;
 	}
 
 
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 
@@ -153,7 +155,7 @@ public class BorrowProjectBean {
 			Integer lenderTwo, Integer lenderThree, Integer lenderFour, Integer lenderFive, Integer numberOfLenders) {
 		super();
 		this.creditId = creditId;
-		this.user_id = user_id;
+		this.userId = user_id;
 		this.inicial_amount = inicial_amount;
 		this.current_amount = current_amount;
 		this.request_id = request_id;
@@ -170,7 +172,7 @@ public class BorrowProjectBean {
 
 	@Override
 	public String toString() {
-		return "BorrowProjectBean [creditId=" + creditId + ", user_id=" + user_id + ", inicial_amount=" + inicial_amount
+		return "BorrowProjectBean [creditId=" + creditId + ", user_id=" + userId + ", inicial_amount=" + inicial_amount
 				+ ", current_amount=" + current_amount + ", request_id=" + request_id + ", number_of_payments_left="
 				+ number_of_payments_left + ", interest_rate=" + interest_rate + ", lenderOne=" + lenderOne
 				+ ", lenderTwo=" + lenderTwo + ", lenderThree=" + lenderThree + ", lenderFour=" + lenderFour

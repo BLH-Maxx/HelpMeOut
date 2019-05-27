@@ -29,7 +29,7 @@ crossorigin="anonymous">
       <div class="list-group list-group-flush">
         <a href="#" class="list-group-item list-group-item-action bg-light">Request a Credit</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Status of Credits</a>
-        <a href="http://localhost:8100/makeadeposit" class="list-group-item list-group-item-action bg-light">Deposite Money</a>
+        <a href="/depositemoney/makeadeposit" class="list-group-item list-group-item-action bg-light">Deposite Money</a>
         <a href="http://localhost:8300/mycredit" class="list-group-item list-group-item-action bg-light">My Credits</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Borrow Money</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">LogOut</a>
@@ -73,39 +73,14 @@ crossorigin="anonymous">
 <!-- here we start the code of each page -->
 
       
-
-			<div class="container-fluid">
-				<h1 class="mt-4">Something Nice will be here but currently i
-					have no idea</h1>
-				<!-- here is the good part -->
-
-				<div class="container">
-					<table class="table table-hover">
-						<tr>
-							<th>Credit Number</th>
-							<th>Current Balance</th>
-							<th>Payments left</th>
-							<th>Next amount to pay</th>
-							
-						</tr>
-						<tr th:each="CurrentCredits : ${currentCredits}">
-							<td th:text="${CurrentCredits.creditId}"></td>
-							<td th:text="'$'+${CurrentCredits.current_amount}"></td>
-							<td th:text="${CurrentCredits.number_of_payments_left}"></td>
-							<td th:text="${#numbers.formatCurrency(CurrentCredits.next_payment)}"></td>
-							<td>
-								<form th:action="@{'/mycredit/' + ${CurrentCredits.creditId}}" method="post">
-					              <p><input class="btn btn-primary eBtn" type="submit" value="Pay"/></p>
-         					    </form>
-						</tr>
-					</table>
-				</div>
-
-
-<!-- here end the good part -->
-
-
-			</div>
+			  <div class="container-fluid">
+        <h1 class="mt-4">Thanks for your payment</h1>
+        <a href="http://localhost:8000/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Back to main page</a>
+       </div>
+    </div>
+    
+    
+<!-- here we end the code of each page. -->			
 		</div>
 		<!-- /#page-content-wrapper -->
 

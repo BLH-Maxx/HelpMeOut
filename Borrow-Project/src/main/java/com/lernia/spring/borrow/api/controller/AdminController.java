@@ -60,7 +60,8 @@ public class AdminController {
 		bpb.setInterest_rate(30.00);
 		bpb.setNumber_of_payments_left(borrow.getPeriod());
 		bpb.setRequest_id(borrow.getBorrowId());
-		bpb.setUser_id(borrow.getUserId());
+		bpb.setUserId(borrow.getUserId());	
+		System.out.println("USERID =====" + borrow.getUserId());
 		bpb.setNumberOfLenders(0);
 		
 		System.out.println(bpb);
