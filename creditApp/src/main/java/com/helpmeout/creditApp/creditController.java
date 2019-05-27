@@ -37,6 +37,7 @@ public class creditController {
 		
 		List<Credit> findAllByUserId = credit.findAllByUserId(theUserId);
 
+
 		/*
 		// See here if it's better??
 		for (Credit credit : findAllByUserId) {
@@ -56,6 +57,8 @@ public class creditController {
 
 			
 		}*/
+
+
 
 		for (int i = 0; i < findAllByUserId.size(); i++) {
 

@@ -40,7 +40,7 @@
 	</nav>
 
 	<div class="container text-center" id="tasksDiv">
-		<h3>All Rejected Requests</h3>
+		<h3>All Lendable Requests</h3>
 		<hr>
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered">

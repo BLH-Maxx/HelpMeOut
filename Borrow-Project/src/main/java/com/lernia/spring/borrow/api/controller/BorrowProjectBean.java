@@ -15,6 +15,7 @@ public class BorrowProjectBean {
 	private Integer lenderFour;	
 	private Integer lenderFive;	
 	private Integer numberOfLenders;
+	private Double next_payment;
 
 	
 	public Integer getCreditId() {
@@ -25,8 +26,6 @@ public class BorrowProjectBean {
 	public void setCreditId(Integer creditId) {
 		this.creditId = creditId;
 	}
-
-
 
 
 	public Integer getUserId() {
@@ -182,6 +181,16 @@ public class BorrowProjectBean {
 
 	public BorrowProjectBean() {
 		
+	}
+
+
+	public Double getNext_payment() {
+		return next_payment;
+	}
+
+
+	public void setNext_payment(Double next_payment) {
+		this.next_payment = next_payment;
 	}
 	
 	

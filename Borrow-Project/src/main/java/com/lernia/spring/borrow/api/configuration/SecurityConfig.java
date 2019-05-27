@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -63,15 +64,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		return daoAuthenticationProvider;
 //	} 
 	
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http
-        .csrf().disable()
-        .authorizeRequests().antMatchers("/**").authenticated().and().httpBasic();
-        
-        http.headers().frameOptions().disable();
+		http.csrf().disable().authorizeRequests()
+				.antMatchers("/welcome", "/register", "/login").permitAll()
+				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.and()
+				.httpBasic()
+				.and()
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/my-dashboard");
 	}
 
 //	@Override
