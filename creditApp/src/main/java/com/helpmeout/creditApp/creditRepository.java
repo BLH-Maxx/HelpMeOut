@@ -18,12 +18,10 @@ public interface creditRepository extends JpaRepository<Credit, Integer> {
 	
 	
 	@Transactional
-	@Query(value = "UPDATE credit \r\n" + 
-			"SET \r\n" + 
-			"    current_amount = ?1\r\n" + 
-			"WHERE\r\n" + 
-			"    credit_id = ?2", nativeQuery = true)
-	public String putNewBalanceInCredit(double amountToPay, Integer integer);
+	@Modifying
+	@Query(value = "UPDATE credit SET current_amount = ?1, number_of_payments_left = ?2 WHERE credit_id = ?3", nativeQuery = true)
+	void putNewBalanceInCredit(double amountToPay,Integer paymentsLeft, Integer integer);
+	
 	
 
 }

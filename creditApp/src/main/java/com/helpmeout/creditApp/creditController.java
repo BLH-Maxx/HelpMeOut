@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -23,6 +24,8 @@ public class creditController {
 
 	@Autowired
 	private CreditAppAccountAppProxy proxy;
+	
+	
 	
 	
 
@@ -134,11 +137,11 @@ public class creditController {
 		cpb.setAmount(String.valueOf(amountToPay * -1));
 		proxy.makeTransaction(cpb);
 		
+		int newNumbeOfPaymentsLeft = loan.get().getNumber_of_payments_left() - 1;
 		
-		credit.putNewBalanceInCredit(amountToPay, cpb.getCredit_id());
-		
-
-		return "redirect:/thanksforpayment";
+		credit.putNewBalanceInCredit(loan.get().getCurrent_amount().doubleValue() - amountToPay, newNumbeOfPaymentsLeft , cpb.getCredit_id());
+	
+		return "redirect:/credit/thanksforpayment";
 	}
 
 	public double amountToPay(Double amountLeft, Double interestRate, Integer paymentsLeft) {
