@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class depositeMoneyController {
@@ -24,6 +26,9 @@ public class depositeMoneyController {
 	
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private depositRepository dr;
 	
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -48,9 +53,11 @@ public class depositeMoneyController {
 	}
 
 	@PostMapping("/makeadeposit")
-	public String makeADeposite(@ModelAttribute DepositeMoneyBean depositeMoneyBean) {
+	public String makeADeposite(@RequestParam ("personnumber") String number, @ModelAttribute DepositeMoneyBean depositeMoneyBean) {
 
-		depositeMoneyBean.setTransaction_user_id(1);
+		String idNumberByPersonNumber = dr.getIdNumberByPersonNumber(number);
+		
+		depositeMoneyBean.setTransaction_user_id(Integer.valueOf(idNumberByPersonNumber));
 		depositeMoneyBean.setTransaction_type("Deposite");
 		depositeMoneyBean.setCredit_id(null);
 		depositeMoneyBean.setTransaction_date(date);

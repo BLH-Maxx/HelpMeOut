@@ -142,6 +142,8 @@ public class ApplicationController {
 		System.out.println("Auth = " + auth.toString());
 		return attr.getRequest().getSession(true); // true == allow create
 	}
+	
+	
 
 	@GetMapping("/my-dashboard")
 	public String showDashboard(HttpServletRequest request, HttpServletResponse response) {
