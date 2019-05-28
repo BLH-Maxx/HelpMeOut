@@ -41,6 +41,16 @@ public class ApplicationRestController {
 
 	}
 
+	
+	@GetMapping("/getoneuserbypersonalnumber/{id}")
+	public User findOneUserByPersonalNumber(@PathVariable long id) {
+		
+		return userService.findBypersonalNumber(id);
+
+	}
+	
+	
+
 	@GetMapping("/getsaldo")
 	public String getSaldo() {
 		return "{\"Version\": 1.0}";
