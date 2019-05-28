@@ -18,9 +18,9 @@ public class indexController {
 	public String index(Model model) {
 		
 		
-		model.addAttribute("port", environment.getProperty("local.server.port"));
+		//model.addAttribute("port", environment.getProperty("local.server.port"));
 		
-		System.out.println(environment.getProperty("local.server.port"));
+		//System.out.println(environment.getProperty("local.server.port"));
 		return "index";
 	}
 

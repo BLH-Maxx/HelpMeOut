@@ -66,7 +66,7 @@ public class depositeMoneyController {
 
 		proxy.makeTransaction(depositeMoneyBean);
 
-		return "redirect:http://localhost:8765/depositemoney/thanksfordeposite";
+		return "redirect:http://localhost:8765/transaction/thanksfordeposite";
 	}
 
 }
