@@ -54,8 +54,8 @@
 
 				<li><a href="#">Request a Credit</a></li>
 				<li><a href="#">Status of Credits</a></li>
-				<li><a href="#">Deposite Money</a></li>
-				<li><a href="#">My Credits</a></li>
+				<li><a href="http://localhost:8765/transaction/makeadeposit">Deposit Money</a></li>
+				<li><a href="http://localhost:8765/credit/mycredit">My Credits</a></li>
 				<li><a href="/lend-Money">Lend Money</a></li>
 				<li><a href="/borrow">Borrow Money</a></li>
 				<li><a href="/show-my-borrows?userName=<%=userName%>">My

@@ -16,7 +16,6 @@ import com.lernia.spring.registration.api.service.UserService;
 
 @RestController
 public class ApplicationRestController {
-	
 
 	@Autowired
 	private UserService userService;
@@ -32,29 +31,29 @@ public class ApplicationRestController {
 		return "User has been saved";
 
 	}
-	
+
 	@GetMapping("/getoneuser/{id}")
 	public User findOneUser(@PathVariable int id) {
-		//ModelAndView mav = new ModelAndView("userCenter/loginPage");
-		//mav.addObject("id", id);
-		//mav.setViewName("login");		
+		// ModelAndView mav = new ModelAndView("userCenter/loginPage");
+		// mav.addObject("id", id);
+		// mav.setViewName("login");
 		return userService.getByID(id);
 
 	}
-	
+
 	@GetMapping("/getsaldo")
-	public String getSaldo() {		
+	public String getSaldo() {
 		return "{\"Version\": 1.0}";
 
 	}
-	
+
 	@GetMapping("/getAuthName")
 	public String getAuthName() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return auth.getName();
 
 	}
-	
+
 	@GetMapping("/getAuthId")
 	public int getAuthId() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -62,17 +61,14 @@ public class ApplicationRestController {
 		return user.getUser_id();
 
 	}
-	
-	public class obteinUserSession {
-		@RequestMapping(value = "/loginds", method = RequestMethod.GET)
-		public String UserSession(ModelMap modelMap) {
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			System.out.println(auth.toString());
-			String name = auth.getName();
-			modelMap.addAttribute("username", name);
-			return "hellos " + name;
-		}
+
+	@RequestMapping(value = "/loginds", method = RequestMethod.GET)
+	public String UserSession(ModelMap modelMap) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth.toString());
+		String name = auth.getName();
+		modelMap.addAttribute("username", name);
+		return "hellos " + name;
 	}
-	
 
 }
