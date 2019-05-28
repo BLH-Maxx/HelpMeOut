@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 @Controller
 public class AccountAppController {
 	
@@ -21,8 +22,10 @@ public class AccountAppController {
 		String findBalanceFromEndUserMoney = mainAccount.findBalanceFromEndUserMoney("1");
 		model.addAttribute("balance", findBalanceFromEndUserMoney);
 
+		List<Mainaccount> findAllByEndUserMoney = mainAccount.findAllByEndUserMoney(1);
 
-
+		
+		model.addAttribute("statement", findAllByEndUserMoney);
 		return "balanceandstatement";
 	}
 

@@ -93,32 +93,21 @@
 
 			<div class="container-fluid" align="center">
 				<h1 class="mt-4">Your Balance is</h1>
-				<h1 th:text="${#numbers.formatDecimal(balance, 1, 'DEFAULT', 2, 'DEFAULT')}"></h1>
+				<h1 th:text="'$'+${#numbers.formatDecimal(balance, 1, 'DEFAULT', 2, 'DEFAULT')}"></h1>
 				<br> <br>
 				<div class="container">
 					<table class="table table-hover">
 						<tr>
-							<th>Credit Number</th>
-							<th>Current Balance</th>
-							<th>Payments left</th>
-							<th>Next amount to pay</th>
-
+							<th>Transaction ID</th>
+							<th>Amount</th>
+							<th>Date</th>
+							
 
 						</tr>
-						<tr th:each="CurrentCredits : ${currentCredits}">
-							<td th:text="${CurrentCredits.creditId}"></td>
-							<td th:text="'$'+${CurrentCredits.current_amount}"></td>
-							<td th:text="${CurrentCredits.number_of_payments_left}"></td>
-							<td
-								th:text="${#numbers.formatCurrency(CurrentCredits.next_payment)}"></td>
-							<td>
-								<form
-									th:action="@{'/credit/mycredit/' + ${CurrentCredits.creditId}}"
-									method="post">
-									<p>
-										<input class="btn btn-primary eBtn" type="submit" value="Pay" />
-									</p>
-								</form>
+						<tr th:each="Statements : ${statement}">
+							<td th:text="${Statements.transaction_id}"></td>
+							<td th:text="'$'+${#numbers.formatDecimal(Statements.amount, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+							<td th:text="${Statements.transaction_date}"></td>
 						</tr>
 					</table>
 				</div>
