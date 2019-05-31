@@ -141,7 +141,7 @@ public class creditController {
 		
 		credit.putNewBalanceInCredit(loan.get().getCurrent_amount().doubleValue() - amountToPay, newNumbeOfPaymentsLeft , cpb.getCredit_id());
 	
-		return "redirect:/credit/thanksforpayment";
+		return "redirect:http://localhost:8765/credit/thanksforpayment";
 	}
 
 	public double amountToPay(Double amountLeft, Double interestRate, Integer paymentsLeft) {
