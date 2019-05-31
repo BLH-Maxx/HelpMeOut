@@ -54,7 +54,7 @@ public class ApplicationController {
 	@RequestMapping({ "/welcome", "/" })
 	public String welcom(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_HOME");
-		return "welcomepage";
+		return "welcomepage2";
 	}
 
 	public class obteinUserSession {
@@ -78,7 +78,7 @@ public class ApplicationController {
 	@RequestMapping("/borrow")
 	public String borrow(HttpServletRequest request, HttpServletRequest response) {
 		request.setAttribute("mode", "MODE_LOGIN");
-		return "borrow";
+		return "borrow2";
 	}
 
 	@PostMapping("/borrow-request")
@@ -105,25 +105,26 @@ public class ApplicationController {
 	public String getMyBorrows(@RequestParam String userName, HttpServletRequest request) {
 		List<Borrow> myBorrows = borrowRepository.findAllByUserName(userName);
 		request.setAttribute("borrows", myBorrows);
-		return "myborrows";
+		return "myborrows2";
 	}
 
 	@GetMapping("/my-dashboard")
 	public String showDashboard(HttpServletRequest request, HttpServletResponse response) {
-		return "dashboard";
+		return "dashboard2";
 	}
 
 	@GetMapping("/lend-Money")
 	public String getAllRejected(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Borrow> lendableBorrows = borrowRepository.findAllLendable(5, "REJECTED");
+		List<Borrow> lendableBorrows = borrowRepository.findAllLendable(5, "APPROVED");
 		request.setAttribute("borrows", lendableBorrows);
-		return "/rejectedborrows";
+		return "/approvedborrows2";
 	}
 
 	@GetMapping("/lend") // Here here here
 	public String approveBorrow(int id, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setAttribute("lenddone", true);
 		return borrowService.doLend(id);
 	}
 

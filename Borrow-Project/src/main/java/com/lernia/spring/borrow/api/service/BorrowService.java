@@ -17,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.lernia.spring.borrow.api.controller.BorrowProjectBean;
+import com.lernia.spring.borrow.api.controller.BorrowProjectCreditAppProxy;
 import com.lernia.spring.borrow.api.model.Borrow;
 import com.lernia.spring.borrow.api.repository.BorrowRepository;
 import com.lernia.spring.borrow.api.model.Borrow.Status;
@@ -34,6 +36,9 @@ public class BorrowService {
 
 	@Autowired
 	private BorrowRepository borrowRepository;
+	
+	@Autowired
+	BorrowProjectCreditAppProxy bpcap;
 
 	public List<Borrow> showAllborrows() {
 		List<Borrow> borrows = new ArrayList<Borrow>();
@@ -102,12 +107,12 @@ public class BorrowService {
 	}
 
 	public String doLend(int id) {
-		
+
 		Borrow borrow = borrowRepository.findAllByborrow_id(id);
 		if (borrow.getNumberOfLenders() == 5) {
-			return "dashboard";
+			return "redirect:my-dashboard";
 		}
-		
+
 		int section = borrow.getRequestedAmount() / 5;
 		borrow.setRemainingAmount(borrow.getRemainingAmount() - section);
 		int lender1 = borrow.getLenderOneId();
@@ -133,6 +138,29 @@ public class BorrowService {
 			borrow.setNumberOfLenders(borrow.getNumberOfLenders() + 1);
 		}
 
-		return "dashboard";
+		// Check with MAX
+
+		BorrowProjectBean bpb = new BorrowProjectBean();
+
+		bpb.setInicial_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount())));
+		bpb.setCurrent_amount(Double.parseDouble(String.valueOf(borrow.getRequestedAmount()))); // Ghaiath
+		bpb.setInterest_rate(30.00);
+		bpb.setNumber_of_payments_left(borrow.getPeriod());
+		bpb.setRequest_id(borrow.getBorrowId());
+		bpb.setUserId(borrow.getUserId());
+		System.out.println("USERID =====" + borrow.getUserId());
+		bpb.setNumberOfLenders(0);
+		bpb.setLenderOne(borrow.getLenderOneId());
+		bpb.setLenderTwo(borrow.getLenderTwoId());
+		bpb.setLenderThree(borrow.getLenderThreeId());
+		bpb.setLenderFour(borrow.getLenderFourId());
+		bpb.setLenderFive(borrow.getLenderFiveId());
+		bpb.setNext_payment(borrow.getRequestedAmount() / 5.00);
+		bpb.setNumberOfLenders(borrow.getNumberOfLenders());
+		System.out.println(bpb);
+
+		bpcap.makeACredit(bpb);
+
+		return "redirect:my-dashboard";
 	}
 }
