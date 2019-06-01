@@ -48,7 +48,7 @@ public class ApplicationRestController {
 
 	}
 
-	@GetMapping("/getalluser")
+	@GetMapping("/admin/getalluser")
 	public List<User> findAllUser() {
 		return userService.showAllUsers();
 

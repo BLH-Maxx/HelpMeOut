@@ -59,7 +59,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 			// Search in the DB if we find the user by token subject (username)
 			// If so, then grab user details and create spring auth token using username,
 			// pass, authorities/roles
-			
+
 			if (userName != null) {
 				User user = userRepository.findByuserName(userName);
 				UserDetailsPrincipal principal = new UserDetailsPrincipal(user);

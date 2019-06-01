@@ -3,17 +3,17 @@ package com.lernia.spring.registration.api.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.lernia.spring.registration.api.repository.UserRepository;
 import com.lernia.spring.registration.api.service.UserDetailsServiceImpl;
 
 @Configuration
@@ -23,32 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
 
-//	@Autowired
-//	private DataSource dataSource;
-//
-//	@Value("${spring.queries.users-query}")
-//	private String usersQuery;
-//
-//	@Value("${spring.queries.roles-query}")
-//	private String rolesQuery;
-
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-//		authenticationMgr.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
-//				.dataSource(dataSource).passwordEncoder(encoderPassword());
-//
-//		System.out.println(usersQuery);
-//		System.out.println(rolesQuery);
-//		System.out.println(
-//				encoderPassword().matches("abc123ABC", "$2a$10$DD/FQ0hTIprg3fGarZl1reK1f7tzgM4RuFKjAKyun0Si60w6g3v5i"));
-//
-//		System.out.println("Zai   " + authenticationMgr.jdbcAuthentication().usersByUsernameQuery(usersQuery)
-//				.authoritiesByUsernameQuery(rolesQuery).dataSource(dataSource).passwordEncoder(encoderPassword()));
-//
-//	}
-
-	private UserDetailsService userDetailService;
-	private Environment environment;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) {
@@ -67,15 +43,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		http.csrf().disable().authorizeRequests().antMatchers("*").permitAll();
-
-		http.csrf().disable().authorizeRequests().antMatchers("/welcome", "/register", "/login").permitAll()
-				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated().antMatchers("/admin/**")
-				.hasRole("ADMIN").and().formLogin().loginProcessingUrl("/login-user").loginPage("/login")
-				.defaultSuccessUrl("/my-dashboard").usernameParameter("userName").passwordParameter("password").and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
-
+		http
+				// remove csrf and state in session because in jwt we do not need them
+				.csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				// add jwt filters (1. authentication, 2. authorization)
+				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
+				.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
+				.authorizeRequests()
+				// configure access rules
+				.antMatchers(HttpMethod.POST, "/login").permitAll()
+				.antMatchers("/welcome", "/register").permitAll()
+				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
+				.antMatchers("/admin/**").hasRole("ADMIN");
 	}
 
 	@Override
