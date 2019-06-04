@@ -31,12 +31,12 @@ public class ApplicationRestController {
 	private BorrowProjectAuthProxy borrowProjectAuthProxy;
 
 	@GetMapping("/getsaldofromauth")
-	public String getSaldo() {
+	public String getBalanceFromAuth() {
 		return borrowProjectAuthProxy.getSaldo();
 	}
 
 	@GetMapping("/getauthname")
-	public String getAuthName() {
+	public String getAuthNameFromAuth() {
 		return borrowProjectAuthProxy.getAuthName();
 	}
 

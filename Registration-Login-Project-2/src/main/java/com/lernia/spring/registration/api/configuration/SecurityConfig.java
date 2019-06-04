@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.antMatchers("/welcome", "/register").permitAll()
 				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
-				.antMatchers("/admin/**").hasRole("ADMIN");
+				.antMatchers("/admin/**").hasRole("ADMIN").and().formLogin().loginPage("/login");
 	}
 
 	@Override

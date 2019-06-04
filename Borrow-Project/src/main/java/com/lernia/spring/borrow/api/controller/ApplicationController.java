@@ -59,7 +59,7 @@ public class ApplicationController {
 
 	public class obteinUserSession {
 		@RequestMapping(value = "/loginds", method = RequestMethod.GET)
-		public String UserSession(ModelMap modelMap) {
+		public String obtainUserSession(ModelMap modelMap) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			System.out.println(auth.toString());
 			String name = auth.getName();
