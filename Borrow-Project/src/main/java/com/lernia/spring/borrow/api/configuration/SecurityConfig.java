@@ -20,10 +20,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
+
 //	@Autowired
 //	private UserDetailsServiceImpl userDetailsServiceImpl;
-	
+
 //	@Autowired
 //	private DataSource dataSource;
 //
@@ -47,13 +47,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				.authoritiesByUsernameQuery(rolesQuery).dataSource(dataSource).passwordEncoder(encoderPassword()));
 //
 //	}
-	
-	
+
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-		  auth.inMemoryAuthentication().withUser("ghaiath").password("{noop}123").roles("ADMIN");
-		  auth.inMemoryAuthentication().withUser("max").password(encoderPassword().encode("123")).roles("ADMIN");
-		  auth.inMemoryAuthentication().withUser("test").password(encoderPassword().encode("123")).roles("USER");
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("ghaiath").password("{noop}123").roles("ADMIN");
+		auth.inMemoryAuthentication().withUser("max").password(encoderPassword().encode("123")).roles("ADMIN");
+		auth.inMemoryAuthentication().withUser("test").password(encoderPassword().encode("123")).roles("USER");
 	}
 
 //	@Bean
@@ -63,18 +62,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		daoAuthenticationProvider.setUserDetailsService(userDetailsServiceImpl);
 //		return daoAuthenticationProvider;
 //	} 
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeRequests()
-				.antMatchers("/welcome", "/register", "/login").permitAll()
-				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.and()
-				.httpBasic()
-				.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/my-dashboard");
+		http.csrf().disable().authorizeRequests().antMatchers("/**").authenticated().antMatchers("/admin/**")
+				.hasRole("ADMIN").and().httpBasic().and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("http://localhost:8080/login");
+		;
+
+		http.headers().frameOptions().disable();
 	}
 
 //	@Override
@@ -83,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	//	web.ignoring().anyRequest().antMatchers("/resources/**");
 //	}
 //
-	
+
 	@Bean
 	public BCryptPasswordEncoder encoderPassword() {
 		return new BCryptPasswordEncoder();

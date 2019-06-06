@@ -25,13 +25,12 @@ crossorigin="anonymous">
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Current Balance:? $1,000,000 </div>
+      <div class="sidebar-heading">Helping People Out</div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">Request a Credit</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Status of Credits</a>
-        <a href="http://localhost:8100/makeadeposit" class="list-group-item list-group-item-action bg-light">Deposite Money</a>
-        <a href="http://localhost:8300/mycredit" class="list-group-item list-group-item-action bg-light">My Credits</a>
-        <a href="http://localhost:8400/borrow" class="list-group-item list-group-item-action bg-light">Borrow Money</a>
+        <a href="http://localhost:8400/borrow" class="list-group-item list-group-item-action bg-light">Request a Credit</a>
+        <a href="/transaction/makeadeposit" class="list-group-item list-group-item-action bg-light">Make a Transaction</a>
+        <a href="/credit/mycredit" class="list-group-item list-group-item-action bg-light">My Credits</a>
+        <a href="http://localhost:8400/lend-Money" class="list-group-item list-group-item-action bg-light">Borrow Money</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">LogOut</a>
       </div>
     </div>
@@ -92,13 +91,11 @@ crossorigin="anonymous">
 							<td th:text="${CurrentCredits.creditId}"></td>
 							<td th:text="'$'+${CurrentCredits.current_amount}"></td>
 							<td th:text="${CurrentCredits.number_of_payments_left}"></td>
+							<td th:text="${#numbers.formatCurrency(CurrentCredits.next_payment)}"></td>
 							<td>
-								<form th:action="@{'/mycredit/' + ${CurrentCredits.creditId}}" method="post">
-					              <p><input type="submit" value="Submit"/></p>
+								<form th:action="@{'/credit/mycredit/' + ${CurrentCredits.creditId}}" method="post">
+					              <p><input class="btn btn-primary eBtn" type="submit" value="Pay"/></p>
          					    </form>
-							
-							<td><a class="btn btn-primary eBtn">Add</a></td>
-
 						</tr>
 					</table>
 				</div>

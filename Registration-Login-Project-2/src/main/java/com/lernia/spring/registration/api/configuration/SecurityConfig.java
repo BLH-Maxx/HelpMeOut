@@ -55,7 +55,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/login").permitAll()
 				.antMatchers("/welcome", "/register").permitAll()
 				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
+<<<<<<< HEAD
 				.antMatchers("/admin/**").hasRole("ADMIN").and().formLogin().loginPage("/login");
+=======
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.and()
+				.formLogin()
+				.loginProcessingUrl("/login-user")
+				.loginPage("/login")
+				.defaultSuccessUrl("http://localhost:8400/my-dashboard")
+				.usernameParameter("userName")
+				.passwordParameter("password")
+				.and()
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+				.and().addFilter(new AuthenticationJwtFilter(userDetailService, environment, authenticationManager()))
+				;
+						
+>>>>>>> refs/remotes/origin/master
 	}
 
 	@Override

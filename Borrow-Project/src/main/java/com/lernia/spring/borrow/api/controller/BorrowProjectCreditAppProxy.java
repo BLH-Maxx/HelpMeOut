@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(name = "creditApp", url="localhost:8300")
+@FeignClient(name = "credit")
 public interface BorrowProjectCreditAppProxy {
 	
 	@PostMapping("/makecreditform")

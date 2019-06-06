@@ -5,11 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.CrossOrigin;
+=======
+import org.springframework.ui.ModelMap;
+>>>>>>> refs/remotes/origin/master
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+=======
+>>>>>>> refs/remotes/origin/master
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,6 +54,7 @@ public class ApplicationRestController {
 		return userService.getByID(id);
 
 	}
+<<<<<<< HEAD
 
 	@GetMapping("/admin/getalluser")
 	public List<User> findAllUser() {
@@ -57,8 +65,27 @@ public class ApplicationRestController {
 	@GetMapping("/getsaldo")
 	public String getSaldo() {
 		return "{\"Version\": 1.0}";
+=======
+
+	
+	@GetMapping("/getoneuserbypersonalnumber/{id}")
+	public User findOneUserByPersonalNumber(@PathVariable long id) {
+		
+		return userService.findBypersonalNumber(id);
+>>>>>>> refs/remotes/origin/master
 
 	}
+<<<<<<< HEAD
+=======
+	
+	
+
+	@GetMapping("/getsaldo")
+	public String getSaldo() {
+		return "{\"Version\": 1.0}";
+
+	}
+>>>>>>> refs/remotes/origin/master
 
 	@GetMapping("/getAuthName")
 	public String getAuthName() {
@@ -75,10 +102,20 @@ public class ApplicationRestController {
 
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(method = RequestMethod.POST, value = "/loginwithjwt")
 	@ResponseBody
 	public String tryLogin(@RequestBody LoginViewModel VM) {
 		return "TEST";
+=======
+	@RequestMapping(value = "/loginds", method = RequestMethod.GET)
+	public String UserSession(ModelMap modelMap) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth.toString());
+		String name = auth.getName();
+		modelMap.addAttribute("username", name);
+		return "hellos " + name;
+>>>>>>> refs/remotes/origin/master
 	}
 
 }

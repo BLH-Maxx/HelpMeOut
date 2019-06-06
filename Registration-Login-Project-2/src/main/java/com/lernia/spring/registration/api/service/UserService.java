@@ -49,7 +49,7 @@ public class UserService {
 		user.setPassword(encoder().encode(user.getPassword()));
 		user.setActive(true);
 		user.setRating(ThreadLocalRandom.current().nextInt(0, 10 + 1));
-		user.setBalance(1000 * ThreadLocalRandom.current().nextInt(0, 50 + 1));
+		user.setBalance(0);
 		user.setRoles(roles);
 		user.setRoles(user.getRoles());
 		System.out.println("Baq" + roleRepository.findAll());
