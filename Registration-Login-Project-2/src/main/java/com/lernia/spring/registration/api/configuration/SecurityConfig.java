@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.lernia.spring.registration.api.repository.UserRepository;
 import com.lernia.spring.registration.api.service.UserDetailsServiceImpl;
@@ -45,33 +46,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				// remove csrf and state in session because in jwt we do not need them
-				.csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				// add jwt filters (1. authentication, 2. authorization)
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-				.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
-				.authorizeRequests()
+				.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository)).authorizeRequests()
 				// configure access rules
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
-				.antMatchers("/welcome", "/register").permitAll()
-				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated()
-<<<<<<< HEAD
-				.antMatchers("/admin/**").hasRole("ADMIN").and().formLogin().loginPage("/login");
-=======
-				.antMatchers("/admin/**").hasRole("ADMIN")
-				.and()
-				.formLogin()
-				.loginProcessingUrl("/login-user")
-				.loginPage("/login")
-				.defaultSuccessUrl("http://localhost:8400/my-dashboard")
-				.usernameParameter("userName")
-				.passwordParameter("password")
-				.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-				.and().addFilter(new AuthenticationJwtFilter(userDetailService, environment, authenticationManager()))
-				;
-						
->>>>>>> refs/remotes/origin/master
+				.antMatchers(HttpMethod.POST, "/login").permitAll().antMatchers("/welcome", "/register").permitAll()
+				.antMatchers("/login-user", "/save-user", "/my-dahsboard").authenticated().antMatchers("/admin/**")
+				.hasRole("ADMIN").and().formLogin().loginPage("/login").and().formLogin()
+				.loginProcessingUrl("/login-user").loginPage("/login")
+				.defaultSuccessUrl("http://localhost:8400/my-dashboard").usernameParameter("userName")
+				.passwordParameter("password").and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login");
 	}
 
 	@Override
